@@ -2,6 +2,7 @@
 
 import { useState,  React} from 'react';
 import SingleForm from './SingleForm';
+import RootLayout from '@/app/layout';
 
 function CargaDatos() {
     const [pagepart, setPagePart] = useState('nuevaTasacion');
@@ -30,14 +31,15 @@ function CargaDatos() {
     }
 
     return(
-        <div>
+        <RootLayout>
             <div>
-                <SingleForm {...pages_structure.nuevaTasacion} />
-                <button type="button" onClick={handleClick}>Tasar</button>
-                {mensaje && <p>{mensaje}</p>}
+                <div>
+                    <SingleForm {...pages_structure.nuevaTasacion} />
+                    <button type="button" onClick={handleClick}>Tasar</button>
+                    {mensaje && <p>{mensaje}</p>}
+                </div>
             </div>
-        </div>
-
+        </RootLayout>
     )
 }
 

@@ -6,5 +6,5 @@ import RootLayout from './layout'
 
 
 export default function Home() {
-  return null; //Para hacerlo OPA
+  <Main />
 }
