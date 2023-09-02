@@ -1,7 +1,8 @@
 "use client";
 
-import { useState,  React} from 'react'
-import SingleForm from '../components/SingleForm'
+import { useState,  React} from 'react';
+import SingleForm from '../components/SingleForm';
+import CargaDatos from './CargaDatos';
 
 //const pagepart = 'login';
 
@@ -34,19 +35,25 @@ function Main() {
         setPagepart('register')
     };
 
+    const handleNavigateToNewComponent = () => {
+        window.alert('Nuevo Componente');
+        setPagepart('carga');
+    }
+
     return (
         <div>
             {
-                pagepart === 'login' ?
+                pagepart === 'login' ? (
                 <>
                     <SingleForm {...pages_structure.login}/> 
                     <button type="button" onClick = {handleClick} > Registrarse </button>
+                    <button type="button" onClick={handleNavigateToNewComponent}>Ir al componente nuevo</button>
                 </>
-            : 
-                (
-                pagepart === 'register' ?
+            ) : pagepart === 'register' ? (
                 <SingleForm {...pages_structure.register}/> 
-            : 
+            ) : pagepart === 'carga' ? (
+                <CargaDatos />
+            ) : (
                 <p>Not Found</p>
                 )
             }
@@ -55,12 +62,3 @@ function Main() {
 }
 
 export default Main
-
-
-
-
-
-
-
-
-
