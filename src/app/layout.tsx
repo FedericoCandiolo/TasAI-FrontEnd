@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="bg-teal-800 h-10 p-2">
             <Logo />
         </header>
-        <main className="max-w-screen-xl max-h-screen-xl">{children}</main>
+        <main>{children}</main>
         <footer className="bg-black p-2 text-white text-xs">Proyecto final - Universidad CAECE</footer>
       </body>
     </html>
