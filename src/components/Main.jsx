@@ -3,11 +3,12 @@
 import { useState,  React} from 'react';
 import SingleForm from '../components/SingleForm';
 import CargaDatos from './CargaDatos';
+import RootLayout from '@/app/layout';
 
 //const pagepart = 'login';
 
 
-function Main() {
+export default function Main() {
     const [pagepart, setPagepart] = useState('login');
 
     const pages_structure = {
@@ -41,24 +42,22 @@ function Main() {
     }
 
     return (
-        <div>
-            {
-                pagepart === 'login' ? (
-                <>
-                    <SingleForm {...pages_structure.login}/> 
-                    <button type="button" onClick = {handleClick} > Registrarse </button>
-                    <button type="button" onClick={handleNavigateToNewComponent}>Ir al componente nuevo</button>
-                </>
-            ) : pagepart === 'register' ? (
-                <SingleForm {...pages_structure.register}/> 
-            ) : pagepart === 'carga' ? (
-                <CargaDatos />
-            ) : (
-                <p>Not Found</p>
-                )
-            }
-        </div>
+            <div>
+                {
+                    pagepart === 'login' ? (
+                    <>
+                        <SingleForm {...pages_structure.login}/> 
+                        <button type="button" onClick = {handleClick} > Registrarse </button>
+                        <button type="button" onClick={handleNavigateToNewComponent}>Ir al componente nuevo</button>
+                    </>
+                ) : pagepart === 'register' ? (
+                    <SingleForm {...pages_structure.register}/> 
+                ) : pagepart === 'carga' ? (
+                    <CargaDatos />
+                ) : (
+                    <p>Not Found</p>
+                    )
+                }
+            </div>
     )
-}
-
-export default Main
+};
