@@ -3,8 +3,8 @@ import React from 'react'
 function Logo() {
     return (
         <svg
-            width="40"
-            height="30"
+            width="60"
+            height="50"
             viewBox="0 0 250 155.64364614849563">
             <defs id="SvgjsDefs1483"></defs>
             <g
