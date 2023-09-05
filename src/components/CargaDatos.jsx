@@ -30,7 +30,7 @@ function CargaDatos() {
   };
 
   return (
-    <div class="flex items-left justify-left h-screen bg-gradient-to-b from-teal-50 to-teal-800">
+    <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
       <form class="bg-white rounded-2xl ml-2 h-fit mt-20">
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">
