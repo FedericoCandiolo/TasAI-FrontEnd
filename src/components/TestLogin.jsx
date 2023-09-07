@@ -76,7 +76,7 @@ export default function TestLogin() {
                 </svg>
                 <input
                   class="pl-2 outline-none border-none"
-                  type="text"
+                  type="password"
                   name=""
                   id=""
                   placeholder="Contraseña"
