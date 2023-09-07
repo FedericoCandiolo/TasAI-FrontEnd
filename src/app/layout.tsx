@@ -14,11 +14,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header className="bg-teal-800 h-10 p-2">
+        <header className="fixed top-0 left-0 w-full bg-teal-800 p-2">
             <Logo />
         </header>
-        <main className="max-w-screen-xl max-h-screen-xl">{children}</main>
-        <footer className="bg-black p-2 text-white text-xs">Proyecto final - Universidad CAECE</footer>
+        <main>{children}</main>
+        <footer className="fixed bottom-0 left-0 w-full p-2 bg-black content-center">
+          <span className="text-sm text-white">Proyecto final - Universidad CAECE</span>
+        </footer>
       </body>
     </html>
   );
