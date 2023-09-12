@@ -94,3 +94,40 @@ body {
   overflow:scroll;
   overflow-x:hidden;
 }
+
+.mapouter {
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.map {
+  background: #eee;
+  width: 60vw;
+  height: 70vh;
+  border-radius: 1rem;
+  box-shadow: black 1rem 0.5 solid;
+  margin: rem; 
+}
+
+.space-from-header{
+  margin-top: 12vh;
+}
+
+.box {
+  background: #eee;
+  padding: 2rem;
+  width: 20vw;
+  height: 70vh;
+  border-radius: 1rem;
+  box-shadow: black 1rem 0.5 solid;
+  margin: auto 2rem;
+}
+
+.box h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.box p{
+  font-weight: larger;
+}
