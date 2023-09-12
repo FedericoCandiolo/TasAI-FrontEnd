@@ -27,9 +27,9 @@ function Resultados({resultados}) {
               <p>{resultados.ambientes} ambientes</p>
               <p>{resultados.plantas} plantas</p>
               <p>{resultados.banios} baños</p>
-              { resultados.toilletes && <p>{resultados.toilletes} toilletes</p> }
-              { resultados.parrilla && <p> ✔️ Parrilla </p> }
-              { resultados.cochera && <p> Cochera </p> }
+              {resultados.toilletes ? <p>{resultados.toilletes} toilletes</p> : <></>}
+              { resultados.parrilla && <p>✔️ Parrilla </p> }
+              { resultados.cochera && <p>✔️ Cochera </p> }
             </section>
           </article>
             
