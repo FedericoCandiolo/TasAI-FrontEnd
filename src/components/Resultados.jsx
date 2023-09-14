@@ -14,6 +14,15 @@ function Resultados({resultados}) {
     setMensaje("Propiedad Tasada");
   };
 
+  const handleSave = () => {
+    window.alert("Propiedad guardada");
+  }
+
+  const handleVolver = () => {
+    window.alert("Vuelvo atras");
+    setPagePart("carga");
+  }
+
   return (
     <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
       <div class="space-y-12 space-from-header" >
@@ -31,11 +40,34 @@ function Resultados({resultados}) {
               { resultados.parrilla && <p>✔️ Parrilla </p> }
               { resultados.cochera && <p>✔️ Cochera </p> }
             </section>
+
+          {/* Botones */}
+          <div class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
+          <button
+            type="button"
+            class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={handleVolver}
+          >
+            Volver
+          </button>
+          <button
+            type="submit"
+            class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            onClick={handleSave}
+          >
+            Guardar Propiedad
+          </button>
+        </div>  
           </article>
-            
-        </div>
+        
+          
+        
+        
+        </div>   
       </div>
 
+        
+        
       
       <div style={...{width:'1000px', height: '1000px'}}/* class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2" */>
         <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/>
