@@ -3,22 +3,27 @@
 import { useState, React } from "react";
 import SingleForm from "./SingleForm";
 // import RootLayout from "@/app/layout";
-import FieldTasacion from './FieldTasacion';
+import FieldTasacion from "./FieldTasacion";
 
-function CargaDatos({btnsubmit}) {
+function CargaDatos({ btnsubmit }) {
   const [pagepart, setPagePart] = useState("nuevaTasacion");
   const [mensaje, setMensaje] = useState("");
 
   const handleTasar = () => {
     window.alert("La propiedad será tasada.");
     btnsubmit();
-  }
+  };
 
   const pages_structure = {
     nuevaTasacion: {
       title: "Nueva Tasación",
       fields: [
-        { fieldtype: "string", field: "direccion", ph: "calle falsa 123", tt: "Ingrese la dirección del inmueble" },
+        {
+          fieldtype: "string",
+          field: "direccion",
+          ph: "calle falsa 123",
+          tt: "Ingrese la dirección del inmueble",
+        },
         { fieldtype: "string", field: "m2Cubiertos", ph: "10" },
         { fieldtype: "string", field: "m2Descubiertos", ph: "5" },
         { fieldtype: "string", field: "ambientes", ph: "1" },
@@ -42,23 +47,85 @@ function CargaDatos({btnsubmit}) {
             <p class="mt-1 text-sm leading-6 text-gray-600 ml-2">
               Ingrese los datos de la propiedad a tasar
             </p>
-            
-            <FieldTasacion {...{fieldtype: 'string', classes: 'sm:col-span-4 ml-2 mr-2 ', cod: 'direccion',labeltext: 'Dirección',ph: 'Calle 123, Ciudad',tt:'Ingrese una dirección en Argentina'}} />
+
+            <FieldTasacion
+              {...{
+                fieldtype: "string",
+                classes: "sm:col-span-4 ml-2 mr-2 ",
+                cod: "direccion",
+                labeltext: "Dirección",
+                ph: "Calle 123, Ciudad",
+                tt: "Ingrese una dirección en Argentina",
+              }}
+            />
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2">
-              {
-                [
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'm2cubiertos',labeltext: 'Metros Cubiertos',ph: 0},
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'm2descubiertos',labeltext: 'Metros Descubiertos',ph: 0},
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'ambientes',labeltext: 'Ambientes',ph: 0},
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'plantas',labeltext: 'Plantas',ph: 0},
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'banios',labeltext: 'Baños',ph: 0},
-                  {fieldtype: 'number', classes:'sm:col-span-3', cod: 'toilettes',labeltext: 'Toilettes',ph: 0},
-                  {fieldtype: 'boolean', classes:'sm:col-span-3', cod: 'parrilla',labeltext: 'Parrilla', tt: 'Tiene parrilla propia'},
-                  {fieldtype: 'boolean', classes:'sm:col-span-3', cod: 'cochera',labeltext: 'Cochera', tt: 'Tiene cochera propia'},
-                ].map(e=><FieldTasacion {...e}/>)
-              }
-
+              {[
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "m2cubiertos",
+                  labeltext: "Metros Cubiertos",
+                  ph: 0,
+                  tt: "Cantidad de metros cubiertos",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "m2descubiertos",
+                  labeltext: "Metros Descubiertos",
+                  ph: 0,
+                  tt: "Cantidad de metros descubiertos",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "ambientes",
+                  labeltext: "Ambientes",
+                  ph: 0,
+                  tt: "Cantidad de ambientes",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "plantas",
+                  labeltext: "Plantas",
+                  ph: 0,
+                  tt: "Cantidad de plantas",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "banios",
+                  labeltext: "Baños",
+                  ph: 0,
+                  tt: "Cantidad de baños",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-3",
+                  cod: "toilettes",
+                  labeltext: "Toilettes",
+                  ph: 0,
+                  tt: "Cantidad de toilettes",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-3",
+                  cod: "parrilla",
+                  labeltext: "Parrilla",
+                  tt: "Tiene parrilla propia",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-3",
+                  cod: "cochera",
+                  labeltext: "Cochera",
+                  tt: "Tiene cochera propia",
+                },
+              ].map((e) => (
+                <FieldTasacion {...e} />
+              ))}
             </div>
           </div>
         </div>

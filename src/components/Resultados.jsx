@@ -5,6 +5,7 @@ import SingleForm from "./SingleForm";
 // import RootLayout from "@/app/layout";
 import FieldTasacion from './FieldTasacion';
 import Map from './Map';
+import CargaDatos from "./CargaDatos";
 
 function Resultados({resultados}) {
   const [pagepart, setPagePart] = useState("nuevaTasacion");
@@ -20,8 +21,9 @@ function Resultados({resultados}) {
 
   const handleVolver = () => {
     window.alert("Vuelvo atras");
-    setPagePart("carga");
+    btnsubmit();
   }
+
 
   return (
     <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
@@ -44,14 +46,14 @@ function Resultados({resultados}) {
           {/* Botones */}
           <div class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
           <button
-            type="button"
+            type="submit"
             class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={handleVolver}
+            onClick={resultados.btnNuevaTasacion}
           >
-            Volver
+            Nueva Tasacion
           </button>
           <button
-            type="submit"
+            type="button"
             class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={handleSave}
           >
