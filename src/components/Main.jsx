@@ -1,63 +1,50 @@
 "use client";
 
-import { useState,  React} from 'react';
-import SingleForm from '../components/SingleForm';
-import CargaDatos from './CargaDatos';
-import RootLayout from '@/app/layout';
+import { useState, React } from "react";
+import SingleForm from "./SingleForm";
+import RootLayout from "@/app/layout";
+import CargaDatos from "./CargaDatos";
+import Resultados from "./Resultados";
+import Login from "./Login";
+import Register from "./Register";
 
-//const pagepart = 'login';
+export default function TestLogin() {
+  const [pagepart, setPagepart] = useState("login");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
-export default function Main() {
-    const [pagepart, setPagepart] = useState('login');
-
-    const pages_structure = {
-        login: {
-            title: "Iniciar Sesión",
-            submitph: "Iniciar Sesión",
-            fields: [
-                {fieldtype: "email", field: "Usuario", ph: "user@mail.com"},
-                {fieldtype: "password", field: "Contraseña"}
-            ]
-        },
-        register: {
-            title: "Registrarse",
-            submitph: "Registrarse",
-            fields: [
-                {fieldtype: "email", field: "Usuario", ph: "user@mail.com"},
-                {fieldtype: "password", field: "Contraseña"},
-                {fieldtype: "password", field: "Confirmar Contraseña"}
-            ]
-        },
-    };
-
-    const handleClick = () => {
-        window.alert('doing');
-        setPagepart('register')
-    };
-
-    const handleNavigateToNewComponent = () => {
-        window.alert('Nuevo Componente');
-        setPagepart('carga');
-    }
-
-    return (
-            <div>
-                {
-                    pagepart === 'login' ? (
-                    <>
-                        <SingleForm {...pages_structure.login}/> 
-                        <button type="button" onClick = {handleClick} > Registrarse </button>
-                        <button type="button" onClick={handleNavigateToNewComponent}>Ir al componente nuevo</button>
-                    </>
-                ) : pagepart === 'register' ? (
-                    <SingleForm {...pages_structure.register}/> 
-                ) : pagepart === 'carga' ? (
-                    <CargaDatos />
-                ) : (
-                    <p>Not Found</p>
-                    )
-                }
-            </div>
-    )
-};
+  return (
+    <RootLayout isLoggedIn={isLoggedIn}>
+      {pagepart === "login" ? (
+        <Login
+          {...{
+            btnLogin: () => setPagepart("carga") + setIsLoggedIn(true),
+            btnRegister: () => setPagepart("register"),
+          }}
+        />
+      ) : pagepart === "register" ? (
+        <Register {...{ btnRegister: () => setPagepart("login") }} />
+      ) : pagepart === "carga" ? (
+        <CargaDatos {...{ btnsubmit: () => setPagepart("resultados") }} />
+      ) : pagepart === "resultados" ? (
+        <Resultados
+          {...{
+            resultados: {
+              direccion: "Av. de Mayo 866",
+              ambientes: 3,
+              banios: 1,
+              toilletes: 0,
+              cochera: false,
+              parrilla: true,
+              plantas: 1,
+              m2cubiertos: 120,
+              m2descubiertos: 80,
+              btnNuevaTasacion: () => setPagepart("carga"),
+            },
+          }}
+        />
+      ) : (
+        <p>Not Found</p>
+      )}
+    </RootLayout>
+  );
+}
