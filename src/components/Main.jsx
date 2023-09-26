@@ -8,16 +8,16 @@ import Resultados from "./Resultados";
 import Login from "./Login";
 import Register from "./Register";
 
-export default function TestLogin() {
-  const [pagepart, setPagepart] = useState("login");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function TestLogin({ pagepart, setPagepart }) {
+  //const [pagepart, setPagepart] = useState("login");
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <RootLayout isLoggedIn={isLoggedIn}>
+    <>
       {pagepart === "login" ? (
         <Login
           {...{
-            btnLogin: () => setPagepart("carga") + setIsLoggedIn(true),
+            btnLogin: () => setPagepart("carga"),
             btnRegister: () => setPagepart("register"),
           }}
         />
@@ -45,6 +45,6 @@ export default function TestLogin() {
       ) : (
         <p>Not Found</p>
       )}
-    </RootLayout>
+    </>
   );
 }
