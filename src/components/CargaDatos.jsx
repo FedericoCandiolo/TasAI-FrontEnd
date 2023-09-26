@@ -37,14 +37,14 @@ function CargaDatos({ btnsubmit }) {
   };
 
   return (
-    <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
-      <form class="bg-white rounded-2xl ml-2 h-fit mt-20">
-        <div class="space-y-12">
-          <div class="border-b border-gray-900/10 pb-12 DivWithScroll">
-            <h2 class="text-base font-semibold leading-7 text-gray-900 ml-2">
+    <div className="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
+      <form className="bg-white rounded-2xl ml-2 h-fit mt-20">
+        <div className="space-y-12">
+          <div className="border-b border-gray-900/10 pb-12 DivWithScroll">
+            <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
               Nueva tasación
             </h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600 ml-2">
+            <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
               Ingrese los datos de la propiedad a tasar
             </p>
 
@@ -59,7 +59,7 @@ function CargaDatos({ btnsubmit }) {
               }}
             />
 
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2">
               {[
                 {
                   fieldtype: "number",
@@ -131,17 +131,17 @@ function CargaDatos({ btnsubmit }) {
         </div>
 
         {/* Botones */}
-        <div class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
+        <div className="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
           <button
             type="button"
-            class="text-sm font-semibold leading-6 text-gray-900"
+            className="text-sm font-semibold leading-6 text-gray-900"
           >
             Cancelar
           </button>
           <button
             type="submit"
             onClick={handleTasar}
-            class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Tasar
           </button>

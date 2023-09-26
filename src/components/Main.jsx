@@ -9,15 +9,14 @@ import Login from "./Login";
 import Register from "./Register";
 import Processing from "./Processing";
 
-export default function Main() {
-  const [pagepart, setPagepart] = useState("login");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [propiedad, setPropiedad] = useState({})
+export default function Main({ pagepart, setPagepart }) {
+  //const [pagepart, setPagepart] = useState("login");
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [propiedad, setPropiedad] = useState({});
 
   const tasarPropiedad = (prop) => {
     setPropiedad(prop);
     setPagepart("procesando");
-    
 
     //tasamos
     // Simple POST request with a JSON body using fetch
@@ -34,32 +33,30 @@ export default function Main() {
       jardin: true,
       latitud: "80",
       longitud: "80",
-      id_usuario: 1
+      id_usuario: 1,
     };
 
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(property)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(property),
     };
 
-    fetch('http://localhost:8000/tasacion-propiedad-nueva/', requestOptions)
-        .then(response => response.json())
-        .then(data => window.alert(data))
-        .catch(data=>window.alert(data));
-    
-
+    fetch("http://localhost:8000/tasacion-propiedad-nueva/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => window.alert(data))
+      .catch((data) => window.alert(data));
 
     setPropiedad(prop);
     setPagepart("resultados");
-  }
+  };
 
   return (
-    <>{/* <RootLayout isLoggedIn={isLoggedIn}> */}
+    <>
       {pagepart === "login" ? (
         <Login
           {...{
-            btnLogin: () => setPagepart("carga") + setIsLoggedIn(true),
+            btnLogin: () => setPagepart("carga"),
             btnRegister: () => setPagepart("register"),
           }}
         />
@@ -89,6 +86,6 @@ export default function Main() {
       ) : (
         <p>Not Found</p>
       )}
-    </>/* </RootLayout> */
+    </>
   );
 }
