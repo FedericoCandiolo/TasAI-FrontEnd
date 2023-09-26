@@ -142,3 +142,32 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type=number] {
   appearance: textfield;
 }
+
+.centerinpage{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.rotate {
+  width: 100px;
+  animation: rotation 2s infinite linear;
+}
+
+.bigtext {
+  font-size: larger;
+  font-weight: bold;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
