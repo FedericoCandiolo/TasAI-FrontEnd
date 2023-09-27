@@ -8,12 +8,8 @@ import Map from './Map';
 import CargaDatos from "./CargaDatos";
 
 function Resultados({resultados}) {
-  const [pagepart, setPagePart] = useState("nuevaTasacion");
-  const [mensaje, setMensaje] = useState("");
-
-  const handleClick = () => {
-    setMensaje("Propiedad Tasada");
-  };
+  console.log('resultados')
+  console.log(resultados)
 
   const handleSave = () => {
     window.alert("Propiedad guardada");
@@ -31,16 +27,17 @@ function Resultados({resultados}) {
         <div class="border-b border-gray-900/10 pb-12 ">
           <article class="box">
             <h1>Propiedad</h1>         
-            <section class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-1 ml-2 mr-2">
+            <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
               <h3>{resultados.direccion}</h3>
-              <p>{resultados.m2cubiertos} m<sup>2</sup> cubiertos</p>
-              <p>{resultados.m2descubiertos} m<sup>2</sup> descubiertos</p>
+              <p>{resultados.m2cubiertos} Metros cubiertos</p>
+              <p>{resultados.m2descubiertos} Metros descubiertos</p>
               <p>{resultados.ambientes} ambientes</p>
               <p>{resultados.plantas} plantas</p>
               <p>{resultados.banios} baños</p>
               {resultados.toilletes ? <p>{resultados.toilletes} toilletes</p> : <></>}
-              { resultados.parrilla && <p>✔️ Parrilla </p> }
-              { resultados.cochera && <p>✔️ Cochera </p> }
+              <p>{ resultados.parrilla ? '✔️' : '❌'} Parrilla</p>
+              <p>{ resultados.cochera ? '✔️' : '❌'} Cochera</p>
+              <h2>{resultados.precio}</h2>
             </section>
 
           {/* Botones */}
@@ -50,7 +47,7 @@ function Resultados({resultados}) {
             class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={resultados.btnNuevaTasacion}
           >
-            Nueva Tasacion
+            Nueva Tasación
           </button>
           <button
             type="button"

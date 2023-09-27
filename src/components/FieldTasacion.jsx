@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt }) {
+function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actualizarDato }) {
+  const handleChange = (e) => {
+    actualizarDato(
+      fieldtype === "boolean" 
+        ? 
+      (valor ? false : true) 
+        : 
+      (parseInt(e.target.value) ? parseInt(e.target.value) : e.target.value)
+    );
+    console.log('value is ', valor)
+  }
+
   return (
     <div className={`${classes} ${tt ? "tooltip" : ""}`}>
       {tt && <span className="tooltiptext">{tt}</span>}
@@ -16,7 +27,7 @@ function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt }) {
             </label>
           </div>
           <label className="relative inline-flex cursor-pointer items-center">
-            <input id={cod} type="checkbox" className="peer sr-only" />
+            <input id={cod} type="checkbox" className="peer sr-only" name={cod} onChange={handleChange} value={valor}/>
             <label htmlFor={`${{ cod }} hidden`}></label>
             <div className="peer h-4 w-11 rounded border bg-slate-200 after:absolute after:-top-1 after:left-0 after:h-6 after:w-6 after:rounded-md after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-sky-800 peer-checked:after:translate-x-full peer-focus:ring-sky-800"></div>
           </label>
@@ -36,6 +47,8 @@ function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt }) {
               type={fieldtype}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder={ph}
+              onChange={handleChange}
+              value={valor}
             />
           </div>
         </>
