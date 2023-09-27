@@ -1,10 +1,11 @@
 'use-client'
 import React from 'react'
 
-function Processing() {
+function Processing(propiedad, setPropiedad) {
+  
   return (
     <div className='centerinpage'>
-        <svg className="rotate" fill="#000000" version="1.1" id="Capa_1"  width="10vh" height="10vh" viewBox="0 0 26.349 26.35">
+        <svg className="rotate" fill="#222" version="1.1" id="Capa_1"  width="10vh" height="10vh" viewBox="0 0 26.349 26.35">
           <g>
             <g>
               <circle cx="13.792" cy="3.082" r="3.082"/>
