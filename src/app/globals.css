@@ -171,3 +171,11 @@ input[type=number] {
     transform: rotate(359deg);
   }
 }
+
+nextjs-portal {
+  display: none;
+}
+
+.nospace {
+  margin-top: 0;
+}

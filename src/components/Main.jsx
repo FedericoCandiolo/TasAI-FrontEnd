@@ -7,6 +7,7 @@ import CargaDatos from "./CargaDatos";
 import Resultados from "./Resultados";
 import Login from "./Login";
 import Register from "./Register";
+import Fetch from "./Fetch"; ///////////////////
 import Processing from "./Processing";
 
 export default function Main({ pagepart, setPagepart }) {
@@ -14,13 +15,13 @@ export default function Main({ pagepart, setPagepart }) {
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [propiedad, setPropiedad] = useState({});
 
-  const tasarPropiedad = (prop) => {
-    setPropiedad(prop);
+  const tasarPropiedad = () => {
+    const prop = propiedad;
     setPagepart("procesando");
 
     //tasamos
     // Simple POST request with a JSON body using fetch
-    const property = {
+    /* const property = {
       calle: "Av de Mayo",
       numero: 880,
       habitaciones: 20,
@@ -45,12 +46,14 @@ export default function Main({ pagepart, setPagepart }) {
     fetch("http://localhost:8000/tasacion-propiedad-nueva/", requestOptions)
       .then((response) => response.json())
       .then((data) => window.alert(data))
-      .catch((data) => window.alert(data));
-
-    setPropiedad(prop);
-    setPagepart("resultados");
+      .catch((data) => window.alert(data)); */
+    setTimeout(()=>{
+      setPropiedad({...prop, precio: 300000});
+      setPagepart("resultados");
+      console.log(propiedad)
+    },Math.random()*1000+500)
   };
-
+  //return   <Fetch />;
   return (
     <>
       {pagepart === "login" ? (
@@ -63,12 +66,13 @@ export default function Main({ pagepart, setPagepart }) {
       ) : pagepart === "register" ? (
         <Register {...{ btnRegister: () => setPagepart("login") }} />
       ) : pagepart === "carga" ? (
-        <CargaDatos {...{ btnsubmit: tasarPropiedad }} />
+        <CargaDatos {...{ btnsubmit: tasarPropiedad , fields: propiedad, setFields: setPropiedad}} />
       ) : pagepart === "resultados" ? (
         <Resultados
           {...{
             resultados: {
-              direccion: "Av. de Mayo 866",
+              ...propiedad, //// SOLO ESTO QUEDA DESPUES
+              /* direccion: "Av. de Mayo 866",
               ambientes: 3,
               banios: 1,
               toilletes: 0,
@@ -77,6 +81,7 @@ export default function Main({ pagepart, setPagepart }) {
               plantas: 1,
               m2cubiertos: 120,
               m2descubiertos: 80,
+              precio: 300000, */
               btnNuevaTasacion: () => setPagepart("carga"),
             },
           }}
