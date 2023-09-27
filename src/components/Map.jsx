@@ -5,7 +5,6 @@ function Map({direccion}) {
     const replacements = [
     {from:' '	,to:'%20'},
     {from:'!'	,to:'%21'},
-    {from:'"'	,to:'%22'},
     {from:'#'	,to:'%23'},
     {from:'$'	,to:'%24'},
     {from:'%'	,to:'%25'},

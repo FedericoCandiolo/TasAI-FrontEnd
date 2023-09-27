@@ -87,9 +87,7 @@ export default function Main({ pagepart, setPagepart }) {
           }}
         />
       ) : pagepart === "procesando" ? (
-        <Processing {...{propiedad, setPropiedad}} />
-      ) : pagepart === "fetch" ? (
-        <Fetch />
+        <Processing />
       ) : (
         <p>Not Found</p>
       )}

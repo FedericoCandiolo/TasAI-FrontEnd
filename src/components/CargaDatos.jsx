@@ -58,7 +58,7 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
                 labeltext: "Ciudad",
                 ph: "Calle 123, Ciudad",
                 tt: "Ingrese una dirección en Argentina",
-                options: [
+                options: [...([
                   'Barracas',
                   'Parque Patricios',
                   'La Boca',
@@ -105,8 +105,8 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
                   'Villa del Parque',
                   'Villa General Mitre',
                   'Villa Santa Rita',
-                  'OTRA'
-                ]
+                  
+                ].sort()),'OTRA']
               }}
               {...{valor: fields["ciudad"]}}{...{actualizarDato: (v)=>handleField("ciudad",v)}}
               />
@@ -126,7 +126,7 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
                   classes: "sm:col-span-3",
                   cod: "m2descubiertos",
                   labeltext: "Metros Descubiertos",
-                  ph: 1,
+                  ph: 0,
                   tt: "Cantidad de metros descubiertos",
                 },
                 {
