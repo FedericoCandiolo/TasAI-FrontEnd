@@ -47,7 +47,8 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
                 ph: "Calle 123, Ciudad",
                 tt: "Ingrese una dirección en Argentina",
               }}
-            />
+              {...{valor: fields["direccion"]}}{...{actualizarDato: (v)=>handleField("direccion",v)}}
+              />
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2">
               {[

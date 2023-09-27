@@ -48,7 +48,7 @@ export default function Main({ pagepart, setPagepart }) {
       .then((data) => window.alert(data))
       .catch((data) => window.alert(data)); */
     setTimeout(()=>{
-      setPropiedad({...prop, precio: 300000});
+      //setPropiedad({...prop, precio: 300000});
       setPagepart("resultados");
       console.log(propiedad)
     },Math.random()*1000+500)
@@ -87,7 +87,9 @@ export default function Main({ pagepart, setPagepart }) {
           }}
         />
       ) : pagepart === "procesando" ? (
-        <Processing />
+        <Processing {...{propiedad, setPropiedad}} />
+      ) : pagepart === "fetch" ? (
+        <Fetch />
       ) : (
         <p>Not Found</p>
       )}

@@ -1,13 +1,56 @@
 "use client";
 
-import { useState, React } from "react";
-import SingleForm from "./SingleForm";
+import { useState, useEffect, React } from "react";
 // import RootLayout from "@/app/layout";
-import FieldTasacion from './FieldTasacion';
 import Map from './Map';
-import CargaDatos from "./CargaDatos";
 
 function Resultados({resultados}) {
+  ////INICIO FETCH
+  const [data, setData] = useState([]);
+  const [propiedad, setPropiedad] = useState(resultados);
+
+    useEffect(() => {
+    // URL de la API que deseas consultar
+    const apiUrl = "http://localhost:8000/tasacion-propiedad-nueva/";
+    
+    const property = { //Modificar proceso carga para que corresponda 1 a 1
+        calle: propiedad.direccion,
+        numero: propiedad.direccion.match(/(\d+)/)[0],
+        habitaciones: propiedad.ambientes,
+        baños: propiedad.banios,
+        toilets: propiedad.toilletes,
+        dormitorios: propiedad.ambientes,
+        pisos: propiedad.plantas,
+        pileta: true,
+        parrilla: propiedad.parrilla || false,
+        jardin: true,
+        //latitud: "20", //desconocida
+        //longitud: "20",
+        id_usuario: 1,
+      };
+    
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(property),
+      };
+
+    // Realizar una solicitud GET a la API utilizando fetch()
+    fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+        setData(data); // Actualizar el estado con los datos recibidos de la API
+        window.alert(data);
+        console.log(data);
+        setPropiedad({...propiedad, precio: data.precio})
+        })
+        .catch((error) => {
+            console.error('Error al obtener los datos:', error);
+        });
+    }, []); // Ejecuta esto solo una vez al montar el componente
+  ////FIN FETCH
+
+
   console.log('resultados')
   console.log(resultados)
 
@@ -28,16 +71,16 @@ function Resultados({resultados}) {
           <article class="box">
             <h1>Propiedad</h1>         
             <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
-              <h3>{resultados.direccion}</h3>
-              <p>{resultados.m2cubiertos} Metros cubiertos</p>
-              <p>{resultados.m2descubiertos} Metros descubiertos</p>
-              <p>{resultados.ambientes} ambientes</p>
-              <p>{resultados.plantas} plantas</p>
-              <p>{resultados.banios} baños</p>
-              {resultados.toilletes ? <p>{resultados.toilletes} toilletes</p> : <></>}
-              <p>{ resultados.parrilla ? '✔️' : '❌'} Parrilla</p>
-              <p>{ resultados.cochera ? '✔️' : '❌'} Cochera</p>
-              <h2>{resultados.precio}</h2>
+              <h3>{propiedad.direccion}</h3>
+              <p>{propiedad.m2cubiertos} Metros cubiertos</p>
+              <p>{propiedad.m2descubiertos} Metros descubiertos</p>
+              <p>{propiedad.ambientes} ambientes</p>
+              <p>{propiedad.plantas} plantas</p>
+              <p>{propiedad.banios} baños</p>
+              {propiedad.toilletes ? <p>{propiedad.toilletes} toilletes</p> : <></>}
+              <p>{ propiedad.parrilla ? '✔️' : '❌'} Parrilla</p>
+              <p>{ propiedad.cochera ? '✔️' : '❌'} Cochera</p>
+              <h2>{propiedad.precio}</h2>
             </section>
 
           {/* Botones */}
@@ -45,7 +88,7 @@ function Resultados({resultados}) {
           <button
             type="submit"
             class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={resultados.btnNuevaTasacion}
+            onClick={propiedad.btnNuevaTasacion}
           >
             Nueva Tasación
           </button>
