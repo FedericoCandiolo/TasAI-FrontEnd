@@ -7,7 +7,10 @@ import FieldTasacion from "./FieldTasacion";
 import Map from "./Map";
 import CargaDatos from "./CargaDatos";
 
-function Login({ btnLogin, btnRegister }) {
+function Login({ btnLogin, btnRegister,user, setUser }) {
+  setUser(1)
+
+
   const handleLogIn = () => {
     window.alert("Bienvenido");
     btnLogin();

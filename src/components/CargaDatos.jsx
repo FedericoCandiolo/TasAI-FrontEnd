@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import SingleForm from "./SingleForm";
 // import RootLayout from "@/app/layout";
 import FieldTasacion from "./FieldTasacion";
 
 function CargaDatos({ btnsubmit , fields, setFields}) {
-  const [pagepart, setPagePart] = useState("nuevaTasacion");
   const [mensaje, setMensaje] = useState("");
-  
+
+  useEffect(()=>{
+    setFields({});
+  },[])
 
   const handleField = (cod_item, val_item) => {
     const new_fields = fields;
