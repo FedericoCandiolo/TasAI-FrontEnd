@@ -23,7 +23,7 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
     setTimeout(()=>{
       //setPropiedad({...prop, precio: 300000});
       setPagepart("resultados");
-      console.log(propiedad)
+      //console.log(propiedad)
     },Math.random()*1000+500)
   };
 

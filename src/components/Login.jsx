@@ -20,7 +20,6 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
     console.log(user);
     btnLogin();
     console.log(user);
-    window.alert('leaving');
   };
 
   const handleChange = (e) => {

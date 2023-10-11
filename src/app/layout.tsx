@@ -21,7 +21,7 @@ export default function RootLayout({
   isLoggedIn: boolean;
 }) {
   const [stateSuscription, setStateSuscription] = useState(false);
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState({username: ""});
   const [pagepart, setPagepartRaw] = useState("login");
 
   function setPagepart (v : SetStateAction<string>) {
@@ -48,9 +48,10 @@ export default function RootLayout({
               <Logo />
             </div>
             {pagepart !== "login" && (
-              <div className="absolute top-1/2 transform -translate-y-1/2 right-2">
+              <div className="inline absolute top-1/2 transform -translate-y-1/2 right-2">
+                <p>{user.username ? user.username : ""}</p>
                 <button
-                  className=" bg-orange-400 text-white py-1 px-3 hover:bg-orange-300"
+                  className="bg-orange-400 text-white py-1 px-3 hover:bg-orange-300"
                   onClick={handleSuscription}
                 >
                   {stateSuscription ? "Premium" : "Básico"}

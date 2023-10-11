@@ -179,3 +179,14 @@ nextjs-portal {
 .nospace {
   margin-top: 0;
 }
+
+.inline{
+  display: flex !important;
+  flex-direction: row;
+}
+
+.inline p{
+  margin-right: 1rem;
+  font-weight: 500;
+  color: #eee;
+}

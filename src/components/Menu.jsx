@@ -6,7 +6,7 @@ function Menu({setPagepart,user,setUser}) {
 
     useEffect(() => {
     // URL de la API que deseas consultar
-    window.alert('revisando')
+    
     const apiUrl = "http://localhost:8000/inicio-sesion/";
     
     const property = { //Modificar proceso carga para que corresponda 1 a 1
@@ -20,22 +20,28 @@ function Menu({setPagepart,user,setUser}) {
         body: JSON.stringify(property),
       };
       
-    window.alert('por fetch')
-    // Realizar una solicitud GET a la API utilizando fetch() //ERROR CORS
-    // fetch(apiUrl, requestOptions)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //     setData(data); // Actualizar el estado con los datos recibidos de la API
-    //     window.alert(data);
-    //     console.log(data);
-    //     /* setUser({...user, user: data.id_usuario});
-    //     console.log(user); */
+    //window.alert('por fetch')
+    console.log(JSON.stringify(property))
+    //Realizar una solicitud GET a la API utilizando fetch() //ERROR CORS
+    fetch(apiUrl, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+        if(data.non_field_errors) {
+          window.alert(data.non_field_errors[0]);
+          setPagepart('login');
+        } else {
+          setData(data); // Actualizar el estado con los datos recibidos de la API
+          //window.alert(data);
+          //console.log(data);
+          setUser({...user, user: data.id_usuario});
+          console.log(user); 
+        }
         
-    //     })
-    //     .catch((error) => {
-    //         window.alert('error')
-    //         console.error('Error al obtener los datos:', error);
-    //     });
+        })
+        .catch((error) => {
+            window.alert('error')
+            console.error('Error al obtener los datos:', error);
+        });
     }, []); // Ejecuta esto solo una vez al montar el componente
   ////FIN FETCH
 
