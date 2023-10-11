@@ -10,7 +10,7 @@ import CargaDatos from "./CargaDatos";
 function Login({ btnLogin, btnRegister,user, setUser }) {
 
   useEffect(()=>{
-    setUser({});
+    setUser({origen:'login'});
   },[])
 
   

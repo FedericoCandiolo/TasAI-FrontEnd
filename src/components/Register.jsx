@@ -1,61 +1,32 @@
 "use client";
 
-import { useState, React } from "react";
+import { useState, React,useEffect } from "react";
 
-function Register({ btnRegister }) {
+function Register({ btnRegister,user, setUser  }) {
+  useEffect(()=>{
+    setUser({origen:'register'});
+  },[])  
 
-  //CARGA REGISTER
-  /* const [data, setData] = useState([]);
-
-  useEffect(() => {
-  // URL de la API que deseas consultar
-  const apiUrl = "http://localhost:8000/registro/";
-  
-  const body = { //Modificar proceso carga para que corresponda 1 a 1
-    username,
-    email,
-    password,
-      calle: propiedad.direccion,
-      numero: propiedad.direccion.match(/(\d+)/)[0],
-      habitaciones: propiedad.ambientes,
-      baños: propiedad.banios,
-      toilets: propiedad.toilletes,
-      dormitorios: propiedad.ambientes,
-      pisos: propiedad.plantas,
-      pileta: true,
-      parrilla: propiedad.parrilla || false,
-      jardin: true,
-      //latitud: "20", //desconocida
-      //longitud: "20",
-      id_usuario: 1,
-    };
-  
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    };
-
-  // Realizar una solicitud GET a la API utilizando fetch()
-  fetch(apiUrl, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-      setData(data); // Actualizar el estado con los datos recibidos de la API
-      window.alert(data);
-      console.log(data);
-      setUser({...data})
-      })
-      .catch((error) => {
-          console.error('Error al obtener los datos:', error);
-      });
-  }, []); // Ejecuta esto solo una vez al montar el componente
-  ////FIN FETCH */
+  const handleChange = (e) => {
+    const newuser = {...user};
+    //console.log(e)
+    newuser[e.target.id] = e.target.value;
+    //newuser[e.target.getAttribute('id')] = e.target.value;
+    setUser({...newuser})
+    console.log(user)
+  }
 
   const handleRegister = () => {
-    window.alert("Registrado");
-    btnRegister();
+    window.alert("Registrado");    
+    console.log(user);
+    if(user.pwd === user.confirm_pwd){
+      btnRegister();
+    }
+    else{
+      window.alert("Las contraseñas no coinciden.");
+    }
   };
-
+ 
   return (
     <div className="h-screen flex">
       <div className="flex w-3/4 bg-gradient-to-b from-teal-50 to-teal-800 i justify-around items-center">
@@ -93,11 +64,12 @@ function Register({ btnRegister }) {
               className="pl-2 outline-none border-none"
               type="text"
               name=""
-              id=""
-              placeholder="Dirección Email"
+              id="username"
+              placeholder="Nombre de Usuario"
+              onChange={handleChange}
             />
           </div>
-          <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
+          <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-400"
@@ -114,8 +86,9 @@ function Register({ btnRegister }) {
               className="pl-2 outline-none border-none"
               type="password"
               name=""
-              id=""
+              id="pwd"
               placeholder="Contraseña"
+              onChange={handleChange}
             />
           </div>
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
@@ -135,8 +108,9 @@ function Register({ btnRegister }) {
               className="pl-2 outline-none border-none"
               type="password"
               name=""
-              id=""
+              id="confirm_pwd"
               placeholder="Confirmar Contraseña"
+              onChange={handleChange}
             />
           </div>
           <button
