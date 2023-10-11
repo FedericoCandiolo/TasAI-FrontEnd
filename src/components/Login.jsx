@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import SingleForm from "./SingleForm";
 // import RootLayout from "@/app/layout";
 import FieldTasacion from "./FieldTasacion";
@@ -8,13 +8,29 @@ import Map from "./Map";
 import CargaDatos from "./CargaDatos";
 
 function Login({ btnLogin, btnRegister,user, setUser }) {
-  setUser(1)
 
+  useEffect(()=>{
+    setUser({});
+  },[])
+
+  
 
   const handleLogIn = () => {
-    window.alert("Bienvenido");
+    window.alert("Iniciando sesión.");
+    console.log(user);
     btnLogin();
+    console.log(user);
+    window.alert('leaving');
   };
+
+  const handleChange = (e) => {
+    const newuser = {...user};
+    //console.log(e)
+    newuser[e.target.id] = e.target.value;
+    //newuser[e.target.getAttribute('id')] = e.target.value;
+    setUser({...newuser})
+    console.log(user)
+  }
 
   const handleRegister = () => {
     window.alert("Register");
@@ -57,8 +73,9 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
               className="pl-2 outline-none border-none"
               type="text"
               name=""
-              id="email"
-              placeholder="Dirección Email"
+              id="username"
+              placeholder="Nombre de usuario"
+              onChange={handleChange}
             />
           </div>
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
@@ -78,12 +95,13 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
               className="pl-2 outline-none border-none"
               type="password"
               name=""
-              id=""
-              placeholder="Contraseña"
+              id="pwd"
+              placeholder="Contraseña"              
+              onChange={handleChange}
             />
           </div>
           <button
-            type="submit"
+            //type="submit"
             className="block w-full bg-sky-800 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
             onClick={handleLogIn}
           >

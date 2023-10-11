@@ -33,7 +33,7 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
       {pagepart === "login" ? (
         <Login
           {...{
-            btnLogin: () => setPagepart("carga"),
+            btnLogin: () => setPagepart("menu"),
             btnRegister: () => setPagepart("register"),
             user, setUser,
           }}
@@ -43,7 +43,7 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
       ) : pagepart === "carga" ? (
         <CargaDatos {...{ btnsubmit: tasarPropiedad , fields: propiedad, setFields: setPropiedad}} />
       ) : pagepart === "menu" ? (
-        <Menu {...{ setPagepart }} />
+        <Menu {...{ setPagepart ,user,setUser}} />
       ) : pagepart === "resultados" ? (
         <Resultados
           {...{

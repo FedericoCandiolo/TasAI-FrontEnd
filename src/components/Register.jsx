@@ -3,6 +3,54 @@
 import { useState, React } from "react";
 
 function Register({ btnRegister }) {
+
+  //CARGA REGISTER
+  /* const [data, setData] = useState([]);
+
+  useEffect(() => {
+  // URL de la API que deseas consultar
+  const apiUrl = "http://localhost:8000/registro/";
+  
+  const body = { //Modificar proceso carga para que corresponda 1 a 1
+    username,
+    email,
+    password,
+      calle: propiedad.direccion,
+      numero: propiedad.direccion.match(/(\d+)/)[0],
+      habitaciones: propiedad.ambientes,
+      baños: propiedad.banios,
+      toilets: propiedad.toilletes,
+      dormitorios: propiedad.ambientes,
+      pisos: propiedad.plantas,
+      pileta: true,
+      parrilla: propiedad.parrilla || false,
+      jardin: true,
+      //latitud: "20", //desconocida
+      //longitud: "20",
+      id_usuario: 1,
+    };
+  
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+
+  // Realizar una solicitud GET a la API utilizando fetch()
+  fetch(apiUrl, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+      setData(data); // Actualizar el estado con los datos recibidos de la API
+      window.alert(data);
+      console.log(data);
+      setUser({...data})
+      })
+      .catch((error) => {
+          console.error('Error al obtener los datos:', error);
+      });
+  }, []); // Ejecuta esto solo una vez al montar el componente
+  ////FIN FETCH */
+
   const handleRegister = () => {
     window.alert("Registrado");
     btnRegister();
