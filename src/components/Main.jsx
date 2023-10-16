@@ -6,6 +6,7 @@ import RootLayout from "@/app/layout";
 import CargaDatos from "./CargaDatos";
 import Resultados from "./Resultados";
 import Login from "./Login";
+
 import Register from "./Register";
 import Fetch from "./Fetch"; ///////////////////
 import Processing from "./Processing";
@@ -51,6 +52,7 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
               ...propiedad, 
               btnNuevaTasacion: () => setPagepart("carga"),
             },
+            user
           }}
         />
       ) : pagepart === "procesando" ? (

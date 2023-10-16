@@ -190,3 +190,7 @@ nextjs-portal {
   font-weight: 500;
   color: #eee;
 }
+
+.grid-gap{
+  grid-gap: 1rem;
+}

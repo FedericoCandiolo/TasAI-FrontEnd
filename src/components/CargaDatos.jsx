@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, React, useEffect } from "react";
-import SingleForm from "./SingleForm";
+import ciudades from "./options/ciudades";
 // import RootLayout from "@/app/layout";
 import FieldTasacion from "./FieldTasacion";
 
@@ -22,6 +22,7 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
 
   const handleTasar = () => {
     window.alert("La propiedad será tasada.");
+    //console.log('HANDLE TASAR')
     console.log(fields);
     btnsubmit();
   };
@@ -43,97 +44,53 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
             <FieldTasacion
               {...{
                 fieldtype: "string",
-                classes: "sm:col-span-4 ml-2 mr-2 ",
-                cod: "direccion",
+                classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                cod: "calle",
                 labeltext: "Dirección",
-                ph: "Calle 123, Ciudad",
-                tt: "Ingrese una dirección en Argentina",
+                ph: "Calle 123",
+                tt: "Ingrese una dirección en Cdad. de Buenos Aires",
               }}
-              {...{valor: fields["direccion"]}}{...{actualizarDato: (v)=>handleField("direccion",v)}}
+              {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}
+              />
+
+            <FieldTasacion
+              {...{
+                fieldtype: "string",
+                classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                cod: "numero",
+                labeltext: "Nro.",
+                ph: "123",
+                tt: "Ingrese una dirección en Cdad. de Buenos Aires",
+              }}
+              {...{valor: fields["numero"]}}{...{actualizarDato: (v)=>handleField("numero",v)}}
               />
 
             <FieldTasacion
               {...{
                 fieldtype: "options",
-                classes: "sm:col-span-4 ml-2 mr-2 ",
-                cod: "direccion",
+                classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                cod: "ciudad",
                 labeltext: "Ciudad",
                 ph: "Calle 123, Ciudad",
                 tt: "Ingrese una dirección en Argentina",
-                options: [...([
-                  'Barracas',
-                  'Parque Patricios',
-                  'La Boca',
-                  'Nueva Pompeya',
-                  'Villa Lugano',
-                  'Villa Soldati',
-                  'Recoleta',
-                  'Coghlan',
-                  'Villa Urquiza',
-                  'Saavedra',
-                  'Villa Puevrredon',
-                  'Belgrano',
-                  'Nuñez',
-                  'Colegiales',
-                  'Palermo',
-                  'Almagro',
-                  'Boedo',
-                  'Caballito',
-                  'Flores',
-                  'Parque Chacabuco',
-                  'Villa Crespo',
-                  'Chacarita',
-                  'Villa Ortuzar',
-                  'Agronomía',
-                  'Parque Chas',
-                  'Paternal',
-                  'Puerto Madero',
-                  'Retiro',
-                  'San Telmo',
-                  'San Nicolas',
-                  'Monserrat',
-                  'Constitucion',
-                  'San Cristobal',
-                  'Balvanera',
-                  'Liniers',
-                  'Mataderos',
-                  'Parque Avellaneda',
-                  'Villa Luro',
-                  'Monte Castro',
-                  'Floresta',
-                  'Versalles',
-                  'Villa Real',
-                  'Villa Devoto',
-                  'Villa del Parque',
-                  'Villa General Mitre',
-                  'Villa Santa Rita',
-                  
-                ].sort()),'OTRA']
+                options: [...(ciudades.sort()),'OTRA']
               }}
               {...{valor: fields["ciudad"]}}{...{actualizarDato: (v)=>handleField("ciudad",v)}}
               />
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2 grid-gap">
               {[
                 {
                   fieldtype: "number",
-                  classes: "sm:col-span-3",
-                  cod: "m2cubiertos",
-                  labeltext: "Metros Cubiertos",
+                  classes: "sm:col-span-2",
+                  cod: "m2",
+                  labeltext: "Metros Cuadrados",
                   ph: 0,
-                  tt: "Cantidad de metros cubiertos",
+                  tt: "Cantidad de metros cuadrados",
                 },
                 {
                   fieldtype: "number",
-                  classes: "sm:col-span-3",
-                  cod: "m2descubiertos",
-                  labeltext: "Metros Descubiertos",
-                  ph: 0,
-                  tt: "Cantidad de metros descubiertos",
-                },
-                {
-                  fieldtype: "number",
-                  classes: "sm:col-span-3",
+                  classes: "sm:col-span-2",
                   cod: "ambientes",
                   labeltext: "Ambientes",
                   ph: 0,
@@ -141,41 +98,76 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
                 },
                 {
                   fieldtype: "number",
-                  classes: "sm:col-span-3",
-                  cod: "plantas",
-                  labeltext: "Plantas",
+                  classes: "sm:col-span-2",
+                  cod: "dormitorios",
+                  labeltext: "Dormitorios",
                   ph: 0,
-                  tt: "Cantidad de plantas",
+                  tt: "Cantidad de dormitorios",
                 },
                 {
                   fieldtype: "number",
-                  classes: "sm:col-span-3",
+                  classes: "sm:col-span-2",
+                  cod: "cocheras",
+                  labeltext: "Cocheras",
+                  ph: 0,
+                  tt: "Cantidad de cocheras",
+                },
+                {
+                  fieldtype: "number",
+                  classes: "sm:col-span-2",
                   cod: "banios",
                   labeltext: "Baños",
                   ph: 0,
                   tt: "Cantidad de baños",
                 },
                 {
-                  fieldtype: "number",
-                  classes: "sm:col-span-3",
-                  cod: "toilettes",
-                  labeltext: "Toilettes",
-                  ph: 0,
-                  tt: "Cantidad de toilettes",
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-2",
+                  cod: "toilette",
+                  labeltext: "Toilette",
+                  tt: "Tiene toilette (baño sin ducha)",
                 },
                 {
                   fieldtype: "boolean",
-                  classes: "sm:col-span-3",
+                  classes: "sm:col-span-2",
+                  cod: "lavadero",
+                  labeltext: "Lavadero",
+                  tt: "Tiene lavadero",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-2",
+                  cod: "ac",
+                  labeltext: "A/C",
+                  tt: "Tiene aire acondicionado",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-2",
+                  cod: "balcon",
+                  labeltext: "Balcón",
+                  tt: "Tiene balcón",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-2",
                   cod: "parrilla",
                   labeltext: "Parrilla",
                   tt: "Tiene parrilla propia",
                 },
                 {
                   fieldtype: "boolean",
-                  classes: "sm:col-span-3",
-                  cod: "cochera",
-                  labeltext: "Cochera",
-                  tt: "Tiene cochera propia",
+                  classes: "sm:col-span-2",
+                  cod: "jardin",
+                  labeltext: "Jardín",
+                  tt: "Tiene jardín",
+                },
+                {
+                  fieldtype: "boolean",
+                  classes: "sm:col-span-2",
+                  cod: "pileta",
+                  labeltext: "Pileta",
+                  tt: "Tiene pileta",
                 },
               ].map((e) => (
                 <FieldTasacion {...e} {...{valor: fields[e.cod]}}{...{actualizarDato: (v)=>handleField(e.cod,v)}} />
