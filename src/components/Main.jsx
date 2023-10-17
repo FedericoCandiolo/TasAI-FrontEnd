@@ -1,29 +1,27 @@
 "use client";
 
 import { useState, React } from "react";
-import SingleForm from "./SingleForm";
 import RootLayout from "@/app/layout";
 import CargaDatos from "./CargaDatos";
 import Resultados from "./Resultados";
 import Login from "./Login";
-
 import Register from "./Register";
-import Fetch from "./Fetch"; ///////////////////
 import Processing from "./Processing";
 import Menu from "./Menu";
+import CreditCardForm from "./CreditCardForm";
 
 export default function Main({ pagepart, setPagepart, user, setUser }) {
   //const [pagepart, setPagepart] = useState("login");
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [propiedad, setPropiedad] = useState({});
 
-  const tasarPropiedad = () => {
+  const procesar = (f) => {
     const prop = propiedad;
     setPagepart("procesando");
 
     setTimeout(()=>{
       //setPropiedad({...prop, precio: 300000});
-      setPagepart("resultados");
+      f();
       //console.log(propiedad)
     },Math.random()*1000+500)
   };
@@ -40,9 +38,24 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
           }}
         />
       ) : pagepart === "register" ? (
-        <Register {...{ btnRegister: () => setPagepart("menu") ,user, setUser}} />
+        <Register {...{ 
+          btnRegister: () => setPagepart("menu"),
+          btnLogin: () => setPagepart("login"),
+          user, 
+          setUser}} />
+      ) : pagepart === "premium" ? (
+        <CreditCardForm {...{ 
+          btnVolver: () => setPagepart("menu"),
+          btnCargar: () => procesar(()=>setPagepart("menu")),
+          user
+        }} />
       ) : pagepart === "carga" ? (
-        <CargaDatos {...{ btnsubmit: tasarPropiedad , fields: propiedad, setFields: setPropiedad}} />
+        <CargaDatos {...{ 
+          btnsubmit: () => procesar(()=>setPagepart("resultados")),
+          btnCancelar: () => setPagepart("menu"), 
+          fields: propiedad, 
+          setFields: setPropiedad
+        }} />
       ) : pagepart === "menu" ? (
         <Menu {...{ setPagepart ,user,setUser}} />
       ) : pagepart === "resultados" ? (

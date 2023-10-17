@@ -33,7 +33,7 @@ function Menu({setPagepart,user,setUser}) {
           setData(data); // Actualizar el estado con los datos recibidos de la API
           //window.alert(data);
           //console.log(data);
-          setUser({...user, status: 'ok',id_usuario: data.id_usuario});
+          setUser({...user, status: 'ok',id_usuario: data.id_usuario, id_plan: data.id_plan});
           console.log(user); 
         }
         
@@ -73,7 +73,7 @@ function Menu({setPagepart,user,setUser}) {
           setData(data); // Actualizar el estado con los datos recibidos de la API
           //window.alert(data);
           //console.log(data);
-          setUser({...user, status: 'ok',id_usuario: data.user_id});
+          setUser({...user, status: 'ok',id_usuario: data.user_id, id_plan: 1}); /// EL id_plan default es 1
           console.log(user); 
         }
         

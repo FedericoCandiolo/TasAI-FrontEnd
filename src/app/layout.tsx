@@ -21,7 +21,7 @@ export default function RootLayout({
   isLoggedIn: boolean;
 }) {
   const [stateSuscription, setStateSuscription] = useState(false);
-  const [user, setUser] = useState({username: "",status:"not logged"});
+  const [user, setUser] = useState({username: "",status:"not logged",id_plan:-1});
   const [pagepart, setPagepartRaw] = useState("login");
 
   function setPagepart (v : SetStateAction<string>) {
@@ -32,6 +32,8 @@ export default function RootLayout({
   }
 
   const handleSuscription = () => {
+    if(user.id_plan === 3) window.location.href = "localhost:8000/admin";
+    else setPagepart('premium');
     if (stateSuscription === false) {
       setStateSuscription(true);
     } else {
@@ -47,15 +49,23 @@ export default function RootLayout({
             <div className="mr-4" onClick={()=>setPagepart('menu')}>
               <Logo />
             </div>
-            {pagepart !== "login" && (
+            {user.status === "ok" && (
               <div className="inline absolute top-1/2 transform -translate-y-1/2 right-2">
                 <p>{user.status === 'ok' ? user.username : ""}</p>
-                <button
-                  className="bg-orange-400 text-white py-1 px-3 hover:bg-orange-300"
-                  onClick={handleSuscription}
-                >
-                  {stateSuscription ? "Premium" : "Básico"}
-                </button>
+                {user.id_plan === 3 ?
+                  <a className=" bg-orange-400 text-white py-1 px-3 hover:bg-orange-300" href="http://localhost:8000/admin/">Adminisitrador</a>
+                :
+                  <button
+                    className="bg-orange-400 text-white py-1 px-3 hover:bg-orange-300"
+                    onClick={handleSuscription}
+                  >
+                    {
+                    user.id_plan === 1 ?  "Básico" :
+                    user.id_plan === 2 ?  "Premium" :
+                    "ERROR"
+                  }
+                  </button>
+                } 
               </div>
             )}
           </div>

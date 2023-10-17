@@ -5,7 +5,7 @@ import ciudades from "./options/ciudades";
 // import RootLayout from "@/app/layout";
 import FieldTasacion from "./FieldTasacion";
 
-function CargaDatos({ btnsubmit , fields, setFields}) {
+function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
   const [mensaje, setMensaje] = useState("");
 
   useEffect(()=>{
@@ -182,6 +182,7 @@ function CargaDatos({ btnsubmit , fields, setFields}) {
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
+            onClick={btnCancelar}
           >
             Cancelar
           </button>

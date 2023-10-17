@@ -1,11 +1,7 @@
 "use client";
 
 import { useState, React, useEffect } from "react";
-import SingleForm from "./SingleForm";
 // import RootLayout from "@/app/layout";
-import FieldTasacion from "./FieldTasacion";
-import Map from "./Map";
-import CargaDatos from "./CargaDatos";
 
 function Login({ btnLogin, btnRegister,user, setUser }) {
 
@@ -32,7 +28,7 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
   }
 
   const handleRegister = () => {
-    window.alert("Register");
+    // window.alert("Register");
     btnRegister();
   };
   return (

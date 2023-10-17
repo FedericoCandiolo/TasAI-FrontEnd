@@ -2,7 +2,7 @@
 
 import { useState, React,useEffect } from "react";
 
-function Register({ btnRegister,user, setUser  }) {
+function Register({ btnRegister,btnLogin,user, setUser  }) {
   useEffect(()=>{
     setUser({origen:'register'});
   },[])  
@@ -115,10 +115,16 @@ function Register({ btnRegister,user, setUser  }) {
           </div>
           <button
             type="submit"
-            className="block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
-            onClick={handleRegister}
+            className="block w-full bg-sky-800 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"onClick={handleRegister}
           >
             Registrarme
+          </button>
+          <button
+            type="submit"
+            className="block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
+            onClick={btnLogin}
+          >
+            Iniciar Sesión
           </button>
         </form>
       </div>
