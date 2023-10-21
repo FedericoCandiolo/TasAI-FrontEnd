@@ -206,3 +206,8 @@ nextjs-portal {
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
 }
+
+/* leaflet container */
+.leaflet-container {
+  height: 70vh;
+}

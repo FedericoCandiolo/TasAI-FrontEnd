@@ -3,6 +3,7 @@
 import { useState, useEffect, React } from "react";
 // import RootLayout from "@/app/layout";
 import Map from './Map';
+import LeafletMap from './LeafletMap'
 
 function Resultados({resultados, user}) {
   ////INICIO FETCH
@@ -144,7 +145,8 @@ function Resultados({resultados, user}) {
         
       
       <div style={...{width:'1000px', height: '1000px'}}/* class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2" */>
-        <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/>
+        {/* <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/> */}
+        <LeafletMap propiedad={{direccion: `${propiedad.calle} ${propiedad.numero}`}}/>
       </div>
     </div>
   );
