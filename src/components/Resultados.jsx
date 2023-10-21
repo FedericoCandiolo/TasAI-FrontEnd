@@ -38,21 +38,6 @@ function Resultados({resultados, user}) {
       id_usuario: user.id_usuario
     }
 
-    /* const property = { //Modificar proceso carga para que corresponda 1 a 1
-        calle: propiedad.direccion,
-        numero: propiedad.direccion.match(/(\d+)/)[0],
-        habitaciones: propiedad.ambientes,
-        baños: propiedad.banios,
-        toilets: propiedad.toilletes,
-        dormitorios: propiedad.ambientes,
-        pisos: propiedad.plantas,
-        pileta: true,
-        parrilla: propiedad.parrilla || false,
-        jardin: true,
-        //latitud: "20", //desconocida
-        //longitud: "20",
-        id_usuario: 1,
-      }; */
       console.log(
         JSON.stringify(property)
       )
@@ -67,16 +52,40 @@ function Resultados({resultados, user}) {
         .then((response) => response.json())
         .then((data) => {
         setData(data); // Actualizar el estado con los datos recibidos de la API
-        window.alert(data);
+        //window.alert(data);
+        console.log("PRECIO");
         console.log(data);
-        setPropiedad({...propiedad, precio: data.precio})
+        setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad})
+        console.log(propiedad)
         })
+        .then(data=>{
+          const apiUrlSimilares = "http://localhost:8000/propiedades-similares/1/"; //Poner dinamico 
+  //const apiUrlSimilares = `http://localhost:8000/propiedades-similares/${propiedad.id_propiedad}/`; //Poner dinamico 
+  
+          const requestOptionsSimilares = {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          };
+
+          fetch(apiUrlSimilares, requestOptionsSimilares)
+          .then((response) => response.json())
+              .then((data) => {
+              setPropiedad({...propiedad, similares: data})
+              return [propiedad];
+              })
+              .catch((error) => {
+                  console.error('Error al obtener los datos:', error);
+              });
+        })
+        .then(data=>console.log(data))
         .catch((error) => {
             console.error('Error al obtener los datos:', error);
         });
+
+       
     }, []); // Ejecuta esto solo una vez al montar el componente
   ////FIN FETCH
-
+  
 
   console.log('resultados')
   console.log(resultados)
@@ -86,7 +95,7 @@ function Resultados({resultados, user}) {
   }
 
   const handleVolver = () => {
-    window.alert("Vuelvo atras");
+    //window.alert("Vuelvo atras");
     btnsubmit();
   }
 
@@ -99,21 +108,24 @@ function Resultados({resultados, user}) {
             <h1>Propiedad</h1>         
             <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
               <h3>{`${propiedad.calle} ${propiedad.numero}, ${propiedad.ciudad}`}</h3>
-              <p>{propiedad.m2} Metros cuadrados</p>
-              <p>{propiedad.ambientes} { propiedad.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>
-              <p>{propiedad.dormitorios} { propiedad.dormitorios === 1 ? 'dormitorio' : 'dormitorios'}</p>
-              <p>{propiedad.cocheras} { propiedad.cocheras === 1 ? 'cochera' : 'cocheras'}</p>
-              <p>{propiedad.banios} { propiedad.banios === 1 ? 'baño' : 'baños'}</p>
-              <p>{ propiedad.toilette ? '✔️' : '❌'} Toilette</p>
-              <p>{ propiedad.lavadero ? '✔️' : '❌'} Lavadero</p>
-              <p>{ propiedad.parrilla ? '✔️' : '❌'} Parrilla</p>
-              <p>{ propiedad.parrilla ? '✔️' : '❌'} Parrilla</p>
-              <p>{ propiedad.parrilla ? '✔️' : '❌'} Parrilla</p>
-              <p>{ propiedad.cochera ? '✔️' : '❌'} Cochera</p>
               <h2>{
                 Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
-                .format(propiedad.precio)              
+                .format(data.precio)              
               }</h2>
+              <div className="grid2col">
+                <p>{propiedad.m2} metros cuadrados</p>
+                <p>{propiedad.ambientes} { propiedad.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>
+                <p>{propiedad.dormitorios} { propiedad.dormitorios === 1 ? 'dormitorio' : 'dormitorios'}</p>
+                <p>{propiedad.cocheras} { propiedad.cocheras === 1 ? 'cochera' : 'cocheras'}</p>
+                <p>{propiedad.banios} { propiedad.banios === 1 ? 'baño' : 'baños'}</p>
+                <p>{ propiedad.toilette ? '✔️' : '❌'} Toilette</p>
+                <p>{ propiedad.lavadero ? '✔️' : '❌'} Lavadero</p>
+                <p>{ propiedad.ac ? '✔️' : '❌'} A/C</p>
+                <p>{ propiedad.balcon ? '✔️' : '❌'} Balcón</p>
+                <p>{ propiedad.parrilla ? '✔️' : '❌'} Parrilla</p>
+                <p>{ propiedad.jardin ? '✔️' : '❌'} Jardin</p>
+                <p>{ propiedad.pileta ? '✔️' : '❌'} Pileta</p>
+              </div>
             </section>
 
           {/* Botones */}
@@ -146,7 +158,7 @@ function Resultados({resultados, user}) {
       
       <div style={...{width:'1000px', height: '1000px'}}/* class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2" */>
         {/* <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/> */}
-        <LeafletMap propiedad={{direccion: `${propiedad.calle} ${propiedad.numero}`}}/>
+        <LeafletMap propiedad={{direccion: `${propiedad.calle} ${propiedad.numero}` , similares: propiedad.similares} }/>
       </div>
     </div>
   );

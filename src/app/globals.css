@@ -95,9 +95,31 @@ body {
   overflow-x:hidden;
 }
 
+.grid2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3em 2em 2em 2em 2em 2em 2em 2em;
+}
+
+.grid2col p{
+  margin: 0;
+  padding: 0;
+  font-size: small;
+}
+
+.paddingsinput {
+  padding-left: 0.2rem !important;
+  padding-right: 0.2rem !important;
+}
+
 .mapouter {
   padding: 2rem;
   border-radius: 1rem;
+}
+
+.buttonspace{
+  padding-left: 0.3rem !important;
+  padding-right: 0.3rem !important;
 }
 
 .map {
@@ -121,6 +143,14 @@ body {
   border-radius: 1rem;
   box-shadow: black 1rem 0.5 solid;
   margin: auto 2rem;
+}
+
+.map {
+  width: 70vw;
+  height: 70vh;
+  border-radius: 1rem;
+  box-shadow: black 1rem 0.5 solid;
+  /* margin: auto 2rem; */
 }
 
 .box h1 {
