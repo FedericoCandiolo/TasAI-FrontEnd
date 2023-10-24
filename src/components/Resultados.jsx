@@ -148,10 +148,12 @@ function Resultados({resultados, user}) {
             <h1>Propiedad</h1>         
             <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
               <h3>{`${propiedad.calle} ${propiedad.numero}, ${propiedad.ciudad}`}</h3>
-              <h2>{
-                Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
-                .format(data.precio)              
-              }</h2>
+              {propiedad.precio &&
+                <h2>{
+                  Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                  .format(data.precio)              
+                }</h2>
+              }
               <div className="grid2col">
                 <p>{propiedad.m2} metros cuadrados</p>
                 <p>{propiedad.ambientes} { propiedad.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>

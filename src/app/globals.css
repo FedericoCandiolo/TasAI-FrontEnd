@@ -241,3 +241,14 @@ nextjs-portal {
 .leaflet-container {
   height: 70vh;
 }
+
+.centerContainter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerHijo {
+  align-self: center;
+  margin-top: 20vh;
+}
