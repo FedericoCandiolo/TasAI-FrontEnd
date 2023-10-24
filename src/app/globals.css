@@ -98,7 +98,7 @@ body {
 .grid2col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3em 2em 2em 2em 2em 2em 2em 2em;
+  grid-template-rows: 3em 2em 2em 2em 2em;
 }
 
 .grid2col p{
