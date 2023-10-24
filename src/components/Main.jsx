@@ -14,6 +14,7 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
   //const [pagepart, setPagepart] = useState("login");
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [propiedad, setPropiedad] = useState({});
+  const [leermas, setLeerMas] = useState(false);
 
   const procesar = (f) => {
     const prop = propiedad;
@@ -35,14 +36,16 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
             btnLogin: () => setPagepart("menu"),
             btnRegister: () => setPagepart("register"),
             user, setUser,
+            leermas, toggleLeerMas: ()=>setLeerMas(!leermas),
           }}
         />
       ) : pagepart === "register" ? (
         <Register {...{ 
           btnRegister: () => setPagepart("menu"),
           btnLogin: () => setPagepart("login"),
-          user, 
-          setUser}} />
+          user, setUser,
+          leermas, toggleLeerMas: ()=>setLeerMas(!leermas),
+        }} />
       ) : pagepart === "premium" ? (
         <CreditCardForm {...{ 
           btnVolver: () => setPagepart("menu"),

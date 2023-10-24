@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, React, useEffect } from "react";
+import LeerMas from './LeerMas'
 // import RootLayout from "@/app/layout";
 
-function Login({ btnLogin, btnRegister,user, setUser }) {
+function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
 
   useEffect(()=>{
     setUser({origen:'login'});
@@ -37,11 +38,13 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">TasAI</h1>
           <p className="text-white mt-1"> El tasador del futuro</p>
+          {leermas && <LeerMas/>}
           <button
-            type="submit"
+            //type="submit"
             className="block w-28 bg-white text-sky-800 mt-4 py-2 rounded-2xl font-bold mb-2"
+            onClick={toggleLeerMas}
           >
-            Read More
+            {leermas ? 'Leer Menos' : 'Leer Más'}
           </button>
         </div>
       </div>

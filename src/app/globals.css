@@ -252,3 +252,33 @@ nextjs-portal {
   align-self: center;
   margin-top: 20vh;
 }
+
+.leermas {
+  width: 70vw !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+}
+
+.leermas p{
+  margin-bottom: 1rem;
+}
+
+.leermas h1{
+  font-size: larger !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}
+
+.integrantes {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.integrantes p{
+  width: 10vw;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  margin: 0;
+}
