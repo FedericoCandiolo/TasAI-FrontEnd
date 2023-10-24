@@ -7,7 +7,7 @@ import FieldTasacion from "./FieldTasacion";
 
 function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
   const [mensaje, setMensaje] = useState("");
-
+  
   useEffect(()=>{
     setFields({});
   },[])

@@ -13,9 +13,9 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
 
   const handleLogIn = () => {
     window.alert("Iniciando sesión.");
-    console.log(user);
+    //console.log(user);
     btnLogin();
-    console.log(user);
+    //console.log(user);
   };
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ function Login({ btnLogin, btnRegister,user, setUser }) {
     newuser[e.target.id] = e.target.value;
     //newuser[e.target.getAttribute('id')] = e.target.value;
     setUser({...newuser})
-    console.log(user)
+    //console.log(user)
   }
 
   const handleRegister = () => {

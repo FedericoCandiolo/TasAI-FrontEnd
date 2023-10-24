@@ -8,60 +8,106 @@ import LeafletMap from './LeafletMap'
 function Resultados({resultados, user}) {
   ////INICIO FETCH
   const [data, setData] = useState([]);
-  const [propiedad, setPropiedad] = useState(resultados);
+  const [propiedad, setPropiedad] = useState({...resultados,direccion: `${resultados.calle} ${resultados.numero}`});
 
     useEffect(() => {
-    // URL de la API que deseas consultar
-    const apiUrl = "http://localhost:8000/tasacion-propiedad-nueva/";
+      if(!propiedad.latitud){
+        //window.alert('Obteniendo Coordenadas')
+        const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+        const nominatim_request_options = {
+          method: "GET",
+          redirect: "follow",
+        };
+
+        const nominatim_params = {
+          q: `${propiedad.calle} ${propiedad.numero}` + "+" + "Ciudad Autonoma Buenos Aires",
+          format: "json",
+          addressdetails: 1,
+          polygon_geojson: 0,
+        };
     
-    const property = {
-      calle: propiedad.calle,
-      numero: propiedad.numero,
-      ambientes: propiedad.ambientes,
-      baños: propiedad.banios,
-      dormitorios: propiedad.dormitorios,
-      pileta: propiedad.pileta,
-      parrilla: propiedad.parrilla,
-      jardin: propiedad.jardin,
-      latitud: "0", //CON LO DE RODRI
-      longitud: "0", //CON LO DE RODRI
-      esta_guardado: true,
-      metros: propiedad.m2,
-      cochera: propiedad.cocheras,
-      ciudad: propiedad.ciudad,
-      precioxLocalidad: 1500, //CAMBIAR POR CIUDAD
-      toilette: propiedad.toilette,
-      lavadero: propiedad.lavadero,
-      AC: propiedad.ac,
-      balcon: propiedad.balcon,
-      googleMaps: "1",
-      id_usuario: user.id_usuario
-    }
+        const queryString = new URLSearchParams(nominatim_params).toString();
+    
+        //console.log(searchText);
+        //console.log(`${NOMINATIM_BASE_URL}${queryString}`);
+        fetch(`${NOMINATIM_BASE_URL}${queryString}`, nominatim_request_options)
+          .then((response) => response.json())
+          .then((result) => {
+            
+            const propTasada = [
+              {
+                geocode: [result[0]?.lat, result[0]?.lon],
+              },
+            ];
+            console.log(propTasada[0]?.geocode);
+            setPropiedad({...propiedad,latitud:propTasada[0]?.geocode[0],longitud:propTasada[0]?.geocode[1]});
+          })
+          .catch((err) => {
+            console.log("err: ", err);
+          });
+      } else if(!propiedad.id_propiedad){
+        
+        //window.alert('Tasando propiedad')
+        // URL de la API que deseas consultar
+        const apiUrl = "http://localhost:8000/tasacion-propiedad-nueva/";
+        
+        const property = {
+          calle: propiedad.calle,
+          numero: propiedad.numero,
+          ambientes: propiedad.ambientes,
+          baños: propiedad.banios,
+          dormitorios: propiedad.dormitorios,
+          pileta: propiedad.pileta,
+          parrilla: propiedad.parrilla,
+          jardin: propiedad.jardin,
+          latitud: propiedad.latitud, //CON LO DE RODRI
+          longitud: propiedad.longitud, //CON LO DE RODRI
+          // latitud: "-34.6090085", //CON LO DE RODRI
+          // longitud: "-58.3787534", //CON LO DE RODRI
+          esta_guardado: true,
+          metros: propiedad.m2,
+          cochera: propiedad.cocheras,
+          ciudad: propiedad.ciudad,
+          precioxLocalidad: 1500, //CAMBIAR POR CIUDAD
+          toilette: propiedad.toilette,
+          lavadero: propiedad.lavadero,
+          AC: propiedad.ac,
+          balcon: propiedad.balcon,
+          googleMaps: "1",
+          id_usuario: user.id_usuario
+        }
 
-      console.log(
-        JSON.stringify(property)
-      )
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(property),
-      };
+          console.log(
+            JSON.stringify(property)
+          )
+          const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(property),
+          };
 
-    // Realizar una solicitud GET a la API utilizando fetch()
-    fetch(apiUrl, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-        setData(data); // Actualizar el estado con los datos recibidos de la API
-        //window.alert(data);
-        console.log("PRECIO");
-        console.log(data);
-        setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad})
-        console.log(propiedad)
-        })
-        .then(data=>{
-          const apiUrlSimilares = "http://localhost:8000/propiedades-similares/1/"; //Poner dinamico 
-  //const apiUrlSimilares = `http://localhost:8000/propiedades-similares/${propiedad.id_propiedad}/`; //Poner dinamico 
-  
+        // Realizar una solicitud GET a la API utilizando fetch()
+          fetch(apiUrl, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+            setData(data); // Actualizar el estado con los datos recibidos de la API
+            //window.alert(data);
+            console.log("PRECIO");
+            console.log(data);
+            setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad})
+            console.log(propiedad)
+            })
+          .then(data=>console.log(data))
+          .catch((error) => {
+              console.error('Error al obtener los datos:', error);
+          });
+
+      } else if(!propiedad.similares){            
+          //window.alert('Buscando similares')
+          //const apiUrlSimilares = "http://localhost:8000/propiedades-similares/1/"; //Poner dinamico 
+          
+          const apiUrlSimilares = `http://localhost:8000/propiedades-similares/${propiedad.id_propiedad}/`; //Poner dinamico 
+
           const requestOptionsSimilares = {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -69,21 +115,15 @@ function Resultados({resultados, user}) {
 
           fetch(apiUrlSimilares, requestOptionsSimilares)
           .then((response) => response.json())
-              .then((data) => {
-              setPropiedad({...propiedad, similares: data})
-              return [propiedad];
-              })
-              .catch((error) => {
-                  console.error('Error al obtener los datos:', error);
-              });
-        })
-        .then(data=>console.log(data))
-        .catch((error) => {
-            console.error('Error al obtener los datos:', error);
-        });
-
-       
-    }, []); // Ejecuta esto solo una vez al montar el componente
+          .then((data) => {
+          setPropiedad({...propiedad, similares: data})
+          return [propiedad];
+          })
+          .catch((error) => {
+              console.error('Error al obtener los datos:', error);
+          });        
+      }       
+    }, [propiedad]); // Ejecuta esto solo una vez al montar el componente
   ////FIN FETCH
   
 
@@ -158,7 +198,10 @@ function Resultados({resultados, user}) {
       
       <div style={...{width:'1000px', height: '1000px'}}/* class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2" */>
         {/* <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/> */}
-        <LeafletMap propiedad={{direccion: `${propiedad.calle} ${propiedad.numero}` , similares: propiedad.similares} }/>
+        {
+          propiedad.id_propiedad &&
+        <LeafletMap propiedad={{direccion: propiedad.direccion , similares: propiedad.similares} }/>
+        }
       </div>
     </div>
   );

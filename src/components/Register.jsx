@@ -13,12 +13,12 @@ function Register({ btnRegister,btnLogin,user, setUser  }) {
     newuser[e.target.id] = e.target.value;
     //newuser[e.target.getAttribute('id')] = e.target.value;
     setUser({...newuser})
-    console.log(user)
+    //console.log(user)
   }
 
   const handleRegister = () => {
     window.alert("Registrado");    
-    console.log(user);
+    //console.log(user);
     if(user.pwd === user.confirm_pwd){
       btnRegister();
     }

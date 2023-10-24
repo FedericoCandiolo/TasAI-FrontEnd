@@ -9,7 +9,7 @@ function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actu
         : 
       (parseInt(e.target.value) && (!fieldtype || fieldtype === "number") ? parseInt(e.target.value) : e.target.value)
     );
-    console.log('value is ', valor)
+    //console.log('value is ', valor)
   }
 
   return (
