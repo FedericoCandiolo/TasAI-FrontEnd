@@ -46,8 +46,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
                 fieldtype: "string",
                 classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
                 cod: "calle",
-                labeltext: "Dirección",
-                ph: "Calle 123",
+                labeltext: "Calle",
+                ph: "Calle",
                 tt: "Ingrese una dirección en Cdad. de Buenos Aires",
               }}
               {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}

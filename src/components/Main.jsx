@@ -66,7 +66,10 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
           {...{
             resultados: {
               ...propiedad, 
-              btnNuevaTasacion: () => setPagepart("carga"),
+              btnNuevaTasacion: () => {
+                setPropiedad({});
+                setPagepart("carga");
+              },
             },
             user
           }}
