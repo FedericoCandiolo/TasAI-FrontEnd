@@ -34,10 +34,10 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
       <form className="bg-white rounded-2xl ml-2 h-fit mt-20">
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12 DivWithScroll">
-            <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
+            <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2 space-before">
               Nueva tasación
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
+            <p className="mt-1 text-sm leading-6 text-gray-600 ml-2 space-below">
               Ingrese los datos de la propiedad a tasar
             </p>
 
@@ -48,7 +48,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
                 cod: "calle",
                 labeltext: "Calle",
                 ph: "Calle",
-                tt: "Ingrese una dirección en Cdad. de Buenos Aires",
+                tt: "Dirección en Ciudad de Buenos Aires",
               }}
               {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}
               />
@@ -60,7 +60,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
                 cod: "numero",
                 labeltext: "Nro.",
                 ph: "123",
-                tt: "Ingrese una dirección en Cdad. de Buenos Aires",
+                tt: "Dirección en Ciudad de Buenos Aires",
               }}
               {...{valor: fields["numero"]}}{...{actualizarDato: (v)=>handleField("numero",v)}}
               />
@@ -70,10 +70,10 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields}) {
                 fieldtype: "options",
                 classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
                 cod: "ciudad",
-                labeltext: "Ciudad",
+                labeltext: "Barrio",
                 ph: "Calle 123, Ciudad",
-                tt: "Ingrese una dirección en Argentina",
-                options: [...(ciudades.sort()),'OTRA']
+                tt: "Ciudad en Ciudad de Buenos Aires",
+                options: [...(ciudades.sort())/*,'OTRA'*/]
               }}
               {...{valor: fields["ciudad"]}}{...{actualizarDato: (v)=>handleField("ciudad",v)}}
               />

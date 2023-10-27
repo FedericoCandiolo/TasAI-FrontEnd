@@ -39,12 +39,14 @@ body {
 .tooltip {
   position: relative;
   display: inline-block;
+  overflow: visible;
   /* border-bottom: 1px dotted black; */
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
+  visibility: hidden;  
+  overflow: visible;
+  width: 150px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -53,7 +55,7 @@ body {
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: 50%;
+  left: 40%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -73,6 +75,14 @@ body {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.space-before{
+  margin-top: 1rem !important;
+}
+
+.space-below{
+  margin-bottom: 1rem !important;
 }
 
 .header{
@@ -281,4 +291,20 @@ nextjs-portal {
   font-weight: bold;
   font-size: large;
   margin: 0;
+}
+
+.fondocaece {
+  background-image: url("https://campus.caece.edu.ar/theme/image.php/ucaece/theme/1692807953/bg_login");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
+
+.stickleft{
+  width: 25vw;
+  height: 100vh;
+  margin-left: 75vw;
+  padding: 2rem;
+  padding-top: 40vh;
+  background-color: #eee;
 }
