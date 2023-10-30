@@ -70,7 +70,7 @@ export default function RootLayout({
             )}
           </div>
         </header>
-        <Main {...{ pagepart, setPagepart, user, setUser }} />
+        <Main {...{ pagepart, setPagepartRaw, user, setUser }} />
         {/* <main className="flex-grow mt-16">{children}</main> */}
         <footer className="fixed bottom-0 left-0 w-full p-2 bg-black content-center">
           <span className="text-sm text-white">

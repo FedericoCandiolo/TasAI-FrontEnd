@@ -134,11 +134,13 @@ body {
 
 .map {
   background: #eee;
+  position:absolute !important;
   width: 60vw;
   height: 70vh;
   border-radius: 1rem;
   box-shadow: black 1rem 0.5 solid;
-  margin: rem; 
+  z-index: 1;
+  /* margin: rem;  */
 }
 
 .space-from-header{
@@ -307,4 +309,53 @@ nextjs-portal {
   padding: 2rem;
   padding-top: 40vh;
   background-color: #eee;
+}
+
+.multiselect {
+  width: 14vw;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: visible !important;
+}
+
+.checkboxes {
+  display: block;
+  border: 1px #eee solid;
+  overflow: visible;
+  position: absolute;
+  z-index: 2;
+  height: 0;
+  background-color: #eee;
+  width: inherit;
+}
+
+.checkboxes label {
+  display: block;
+  background: #eee;
+}
+
+.checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+.flex-row{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0;
+  width: 70vw !important;
 }

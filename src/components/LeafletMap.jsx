@@ -7,53 +7,10 @@ import { Icon, divIcon } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import Processing from "./Processing";
 
-// const createCustomClusterIcon = (cluster) => {
-//   return new divIcon({
-//     html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
-//     className: "custom-marker-cluster",
-//     iconSize: PointerEvent(33, 33, true),
-//   });
-// }; -- Ver de implementar después
 
 export default function LeafletMap({ propiedad }) {
-  const [propiedadTasada, setPropiedadTasada] = useState([]);
-  const [dataLoaded, setDataLoaded] = useState(false);
   const similares = propiedad.similares;
 
-  const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
-  const nominatim_request_options = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  useEffect(() => {
-    const nominatim_params = {
-      q: propiedad.direccion + "+" + "Ciudad Autonoma Buenos Aires",
-      format: "json",
-      addressdetails: 1,
-      polygon_geojson: 0,
-    };
-
-    const queryString = new URLSearchParams(nominatim_params).toString();
-
-    //console.log(searchText);
-    //console.log(`${NOMINATIM_BASE_URL}${queryString}`);
-    fetch(`${NOMINATIM_BASE_URL}${queryString}`, nominatim_request_options)
-      .then((response) => response.json())
-      .then((result) => {
-        const propTasada = [
-          {
-            geocode: [result[0]?.lat, result[0]?.lon],
-          },
-        ];
-        console.log(propTasada[0]?.geocode);
-        setPropiedadTasada(propTasada[0]?.geocode);
-        // console.log(result);
-        // console.log(propiedadTasada);
-        setDataLoaded(true);
-      })
-      .catch((err) => console.log("err: ", err));
-  }, []);
 
   let markers = [
   /*   {
@@ -90,21 +47,22 @@ export default function LeafletMap({ propiedad }) {
   console.log("SIMILARES MAP")
   console.log(similares)
   //console.log([...similares].map(e=>[e.latitud, e.longitud]))
-  console.log(propiedadTasada)
+  //console.log(propiedadTasada)
 
   return (
-    <div class="space-from-header map">
-      {dataLoaded && similares ? (
-        <MapContainer className="map" center={propiedadTasada} zoom={13}>
+    <div class="map">
+      {similares ? (
+        <MapContainer className="map" center={[propiedad.latitud,propiedad.longitud]} zoom={13}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={propiedadTasada} icon={CustomIcon}></Marker>
+          <Marker position={[propiedad.latitud,propiedad.longitud]} icon={CustomIcon}></Marker>
           {
             markers.map(m=>
             <Marker position={m.geocode} icon={ComparacionIcon}>
-              <Popup><p>{m.popUp}</p></Popup>
+              <Popup><p>Pop Up</p></Popup>
+              {/* <Popup><p>{m.popUp}</p></Popup> */}
             </Marker>)
           }
           { similares ? 

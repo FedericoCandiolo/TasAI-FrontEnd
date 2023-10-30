@@ -10,11 +10,14 @@ import Processing from "./Processing";
 import Menu from "./Menu";
 import CreditCardForm from "./CreditCardForm";
 
-export default function Main({ pagepart, setPagepart, user, setUser }) {
-  //const [pagepart, setPagepart] = useState("login");
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
   const [propiedad, setPropiedad] = useState({});
   const [leermas, setLeerMas] = useState(false);
+
+  const setPagepart = v => {
+    if(v==='carga') setPropiedad({});
+    setPagepartRaw(v);
+  }
 
   const procesar = (f) => {
     const prop = propiedad;

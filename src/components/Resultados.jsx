@@ -4,11 +4,20 @@ import { useState, useEffect, React } from "react";
 // import RootLayout from "@/app/layout";
 import Map from './Map';
 import LeafletMap from './LeafletMap'
+import CheckBoxList from './CheckBoxList'
 
 function Resultados({resultados, user}) {
   ////INICIO FETCH
   const [data, setData] = useState([]);
   const [propiedad, setPropiedad] = useState({...resultados,direccion: `${resultados.calle} ${resultados.numero}`});
+  const [similaresSeleccionadas, setSimilaresSeleccionadas] = useState([]);
+  const [filtros, setFiltros] = useState([]);
+  const [filtrosEstructura, setFiltrosEstructura] = useState([]);
+  const [filtroAbierto, setFiltroAbierto] = useState('')
+
+  const toSentenceCase = v => v[0].toUpperCase().concat(v.substring(1));
+
+  let mis_filtros_final = {};
 
     useEffect(() => {
       if(!propiedad.latitud){
@@ -46,7 +55,6 @@ function Resultados({resultados, user}) {
             console.log("err: ", err);
           });
       } else if(!propiedad.id_propiedad){
-        
         //window.alert('Tasando propiedad')
         // URL de la API que deseas consultar
         const apiUrl = "http://localhost:8000/tasacion-propiedad-nueva/";
@@ -122,10 +130,77 @@ function Resultados({resultados, user}) {
           .catch((error) => {
               console.error('Error al obtener los datos:', error);
           });        
-      }       
-    }, [propiedad]); // Ejecuta esto solo una vez al montar el componente
+      }  else if(filtros.length === 0) { // CREO FILTROS
+        const mis_filtros = {};
+        for (const k in propiedad.similares[0]) mis_filtros[k] = [];
+        propiedad.similares.map(prop=>{
+          for (const k_p in prop){
+            mis_filtros[k_p] = [...mis_filtros[k_p], prop[k_p]]
+          }
+        });
+        console.log(mis_filtros);
+
+        const mis_filtros_limpios = {};
+
+        for(const k_f in mis_filtros){
+          const item = Array.from(new Set(mis_filtros[k_f]))
+          .sort((a,b)=> typeof(a) === 'boolean' ? a :
+          typeof(a) === 'number' ? parseFloat(a) - parseFloat(b) :
+          a >= b
+          )
+          mis_filtros_limpios[k_f] = item;
+        };
+
+        const estructura_booleanos = [false,true];        
+
+        mis_filtros_final = {
+          ambientes: mis_filtros_limpios.ambientes,
+          dormitorios: mis_filtros_limpios.dormitorios,
+          baños: mis_filtros_limpios.baños,
+          cochera: mis_filtros_limpios.cochera,
+          metros: mis_filtros_limpios.metros,
+          AC: [...estructura_booleanos],
+          balcon: [...estructura_booleanos],
+          jardin: [...estructura_booleanos],
+          parrilla: [...estructura_booleanos],
+          pileta: [...estructura_booleanos],
+          toilette: [...estructura_booleanos],
+        };
+
+        console.log(mis_filtros_final)
+        setFiltros({...mis_filtros_final});
+        setFiltrosEstructura({...mis_filtros_final});
+      } else {
+        let props = [...propiedad.similares];
+        props = props.filter(prop=>{
+          let matches = true;
+          for (const k_s in filtros){
+
+            console.log("MATCH")
+            console.log(filtros[k_s])
+            console.log(prop[k_s])
+            matches = matches && filtros[k_s].findIndex(f=>f===prop[k_s]) !== -1; //Revisar esto
+          }
+          return matches;
+        })
+        setSimilaresSeleccionadas(props);
+      }     
+    }, [propiedad,filtros]); // Ejecuta esto solo una vez al montar el componente
   ////FIN FETCH
   
+  const list_filtros_nombres = [
+    'ambientes',
+    'dormitorios',
+    'baños',
+    'cochera',
+    // metros: mis_filtros_limpios.metros,
+    'AC',
+    'balcon',
+    'jardin',
+    'parrilla',
+    'pileta',
+    'toilette',
+  ];
 
   console.log('resultados')
   console.log(resultados)
@@ -138,7 +213,35 @@ function Resultados({resultados, user}) {
     //window.alert("Vuelvo atras");
     btnsubmit();
   }
+  
+  const refreshPropsSeleccionadas = () => {
+    let props = [...propiedad.similares];
+    props = props.filter(prop=>{
+      let matches = true;
+      for (const k_s in filtros){
 
+        console.log("MATCH")
+        console.log(filtros[k_s])
+        console.log(prop[k_s])
+        matches = matches && filtros[k_s].findIndex(f=>f===prop[k_s]) !== -1; //Revisar esto
+      }
+      return matches;
+    })
+    setSimilaresSeleccionadas(props);
+  }
+
+  const toggleFiltro = (filtro, valor) => {
+    console.log(filtro);
+    console.log(valor);
+    let nuevos_filtros = {...filtros};
+    nuevos_filtros[filtro] = (
+      filtros[filtro].filter(e=>e===valor).length ?
+      filtros[filtro].filter(e=>e!==valor) :
+      [...filtros[filtro], valor]
+    );
+    setFiltros(nuevos_filtros);
+    //refreshPropsSeleccionadas(); // No espera al cambio, corregir
+  }
 
   return (
     <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
@@ -187,24 +290,32 @@ function Resultados({resultados, user}) {
             Guardar Propiedad
           </button>
         </div>  
-          </article>
-        
+          </article>   
           
-        
-        
         </div>   
       </div>
 
-        
-        
       
-      <div style={...{width:'1000px', height: '1000px'}}/* class="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2" */>
-        {/* <Map {...{direccion:'Avenida de Mayo 866, Buenos Aires'}}/> */}
+      <div className="space-from-header" style={...{width:'1000px', height: '1000px'}}>
+        { (filtros && filtrosEstructura) &&//filtros.length &&
+          <div className="flex-row">
+            {
+              list_filtros_nombres.map(f=>filtros[f] ? (<CheckBoxList {...{
+                nombre: toSentenceCase(f),
+                estados: filtrosEstructura[f],
+                estados_seleccionados: filtros[f],
+                fcambio: (e) => toggleFiltro(f,e),
+                estaAbierto: filtroAbierto === f,
+                seleccionarFiltro : () => setFiltroAbierto(filtroAbierto === f ? '' : f), 
+              }}/>) : <></>)
+            }
+          </div>
+        }
         {
           propiedad.id_propiedad &&
-        <LeafletMap propiedad={{direccion: propiedad.direccion , similares: propiedad.similares} }/>
+          <LeafletMap propiedad={{...propiedad, similares: similaresSeleccionadas} }/>
         }
-      </div>
+      </div> 
     </div>
   );
 }
