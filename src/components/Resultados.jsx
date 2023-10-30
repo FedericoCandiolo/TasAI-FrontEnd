@@ -5,6 +5,7 @@ import { useState, useEffect, React } from "react";
 import Map from './Map';
 import LeafletMap from './LeafletMap'
 import CheckBoxList from './CheckBoxList'
+import Processing from './Processing'
 
 function Resultados({resultados, user}) {
   ////INICIO FETCH
@@ -154,19 +155,20 @@ function Resultados({resultados, user}) {
         const estructura_booleanos = [true, false];        
 
         mis_filtros_final = {
+          metros: mis_filtros_limpios.metros,
           ambientes: mis_filtros_limpios.ambientes,
           dormitorios: mis_filtros_limpios.dormitorios,
-          baños: mis_filtros_limpios.baños,
           cochera: mis_filtros_limpios.cochera,
-          metros: mis_filtros_limpios.metros,
+          baños: mis_filtros_limpios.baños,
+          toilette: [...estructura_booleanos],
+          lavadero: [...estructura_booleanos],
           AC: [...estructura_booleanos],
           balcon: [...estructura_booleanos],
           jardin: [...estructura_booleanos],
           parrilla: [...estructura_booleanos],
           pileta: [...estructura_booleanos],
-          toilette: [...estructura_booleanos],
         };
-
+        
         console.log(mis_filtros_final)
         setFiltros({...mis_filtros_final});
         setFiltrosEstructura({...mis_filtros_final});
@@ -189,17 +191,18 @@ function Resultados({resultados, user}) {
   ////FIN FETCH
   
   const list_filtros_nombres = [
+    'metros',
     'ambientes',
     'dormitorios',
-    'baños',
     'cochera',
-    // metros: mis_filtros_limpios.metros,
+    'baños',
+    'toilette',
+    'lavadero',
     'AC',
     'balcon',
     'jardin',
     'parrilla',
     'pileta',
-    'toilette',
   ];
 
   console.log('resultados')
@@ -285,7 +288,7 @@ function Resultados({resultados, user}) {
       <div className="space-from-header" style={...{width:'1000px', height: '1000px'}}>
         { (filtros && filtrosEstructura) &&//filtros.length &&
           <div className="flex-row">
-            {
+            {/* {
               filtros['metros'] ? (<div className="double-row"><CheckBoxList {...{
                 nombre: toSentenceCase('metros'),
                 estados: filtrosEstructura['metros'],
@@ -294,7 +297,7 @@ function Resultados({resultados, user}) {
                 estaAbierto: filtroAbierto === 'metros',
                 seleccionarFiltro : () => setFiltroAbierto(filtroAbierto === 'metros' ? '' : 'metros'), 
               }}/></div>) : <></>
-            }            
+            }   */}          
             {
               list_filtros_nombres.map(f=>filtros[f] ? (<CheckBoxList {...{
                 nombre: toSentenceCase(f),

@@ -29,7 +29,7 @@ export default function LeafletMap({ propiedad }) {
 
   markers = [
     ...markers,
-    ...(similares ? similares.map(p=>({geocode:[p.latitud,p.longitud],popUp:p.direccion})) : [])
+    ...(similares ? similares.map(p=>({geocode:[p.latitud,p.longitud],popUp:p})) : [])
   ]
 
   const CustomIcon = new Icon({
@@ -61,7 +61,22 @@ export default function LeafletMap({ propiedad }) {
           {
             markers.map(m=>
             <Marker position={m.geocode} icon={ComparacionIcon}>
-              <Popup><p>Pop Up</p></Popup>
+              <Popup>
+                <div className="grid2col">
+                  <p>{propiedad.m2} metros cuadrados</p>
+                  <p>{m.popUp.ambientes} { m.popUp.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>
+                  <p>{m.popUp.dormitorios} { m.popUp.dormitorios === 1 ? 'dormitorio' : 'dormitorios'}</p>
+                  <p>{m.popUp.cochera} { m.popUp.cochera === 1 ? 'cochera' : 'cocheras'}</p>
+                  <p>{m.popUp.baños} { m.popUp.baños === 1 ? 'baño' : 'baños'}</p>
+                  <p>{ m.popUp.toilette ? '✔️' : '❌'} Toilette</p>
+                  <p>{ m.popUp.lavadero ? '✔️' : '❌'} Lavadero</p>
+                  <p>{ m.popUp.ac ? '✔️' : '❌'} A/C</p>
+                  <p>{ m.popUp.balcon ? '✔️' : '❌'} Balcón</p>
+                  <p>{ m.popUp.parrilla ? '✔️' : '❌'} Parrilla</p>
+                  <p>{ m.popUp.jardin ? '✔️' : '❌'} Jardin</p>
+                  <p>{ m.popUp.pileta ? '✔️' : '❌'} Pileta</p>
+                </div>
+              </Popup>
               {/* <Popup><p>{m.popUp}</p></Popup> */}
             </Marker>)
           }

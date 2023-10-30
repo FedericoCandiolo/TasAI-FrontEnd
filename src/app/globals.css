@@ -136,7 +136,7 @@ body {
   background: #eee;
   position:absolute !important;
   width: 60vw;
-  height: 70vh;
+  height: 62vh !important;
   border-radius: 1rem;
   box-shadow: black 1rem 0.5 solid;
   z-index: 1;
@@ -363,6 +363,7 @@ nextjs-portal {
   grid-template-rows: 1fr 1fr;
   grid-gap: 0;
   width: 70vw !important;
+  height: 8vh !important;
   grid-auto-flow: column;
 }
 
