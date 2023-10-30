@@ -69,20 +69,16 @@ function Resultados({resultados, user}) {
           pileta: propiedad.pileta,
           parrilla: propiedad.parrilla,
           jardin: propiedad.jardin,
-          latitud: propiedad.latitud, //CON LO DE RODRI
-          longitud: propiedad.longitud, //CON LO DE RODRI
-          // latitud: "-34.6090085", //CON LO DE RODRI
-          // longitud: "-58.3787534", //CON LO DE RODRI
+          latitud: propiedad.latitud, 
+          longitud: propiedad.longitud, 
           esta_guardado: true,
           metros: propiedad.m2,
           cochera: propiedad.cocheras,
-          ciudad: propiedad.ciudad,
-          precioxLocalidad: 1500, //CAMBIAR POR CIUDAD
+          ciudad: propiedad.ciudad.toLowerCase(),
           toilette: propiedad.toilette,
           lavadero: propiedad.lavadero,
           AC: propiedad.ac,
           balcon: propiedad.balcon,
-          googleMaps: "1",
           id_usuario: user.id_usuario
         }
 
