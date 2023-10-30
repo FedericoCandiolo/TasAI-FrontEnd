@@ -312,7 +312,12 @@ nextjs-portal {
 }
 
 .multiselect {
-  width: 14vw;
+  width: 10vw;
+}
+
+.max-height {
+  height: 100%;
+  width: 100%;
 }
 
 .selectBox {
@@ -355,7 +360,12 @@ nextjs-portal {
 
 .flex-row{
   display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-gap: 0;
   width: 70vw !important;
+  grid-auto-flow: column;
+}
+
+.double-row {
+  grid-row: 1 / span 2;
 }

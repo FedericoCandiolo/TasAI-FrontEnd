@@ -2,11 +2,11 @@ import {React,useState} from 'react'
 
 function CheckBoxList({nombre, estados, estados_seleccionados, fcambio, estaAbierto, seleccionarFiltro}) {
     return (
-        <div>
-            <form>
-                <div className="multiselect">
-                    <div className="selectBox" onClick={seleccionarFiltro}>
-                    <select>
+        <div className='max-height'>
+            <form className='max-height'>
+                <div className="multiselect max-height">
+                    <div className="selectBox max-height" onClick={seleccionarFiltro}>
+                    <select className='max-height'>
                         <option>{nombre}</option>
                     </select>
                     <div className="overSelect"></div>
@@ -23,7 +23,7 @@ function CheckBoxList({nombre, estados, estados_seleccionados, fcambio, estaAbie
                                         : 
                                         <input type="checkbox" id={`${nombre}_${e}`} onChange={()=>fcambio(e)} />
                                         }
-                                    {e}</label> {/* Ver que siga el filtro */}
+                                    {typeof(e)==='boolean' ? (e ? 'SÍ' : 'NO') : e}</label> {/* Ver que siga el filtro */}
                                 </>)
                             }
                         </div>

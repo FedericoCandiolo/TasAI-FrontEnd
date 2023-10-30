@@ -151,7 +151,7 @@ function Resultados({resultados, user}) {
           mis_filtros_limpios[k_f] = item;
         };
 
-        const estructura_booleanos = [false,true];        
+        const estructura_booleanos = [true, false];        
 
         mis_filtros_final = {
           ambientes: mis_filtros_limpios.ambientes,
@@ -214,21 +214,7 @@ function Resultados({resultados, user}) {
     btnsubmit();
   }
   
-  const refreshPropsSeleccionadas = () => {
-    let props = [...propiedad.similares];
-    props = props.filter(prop=>{
-      let matches = true;
-      for (const k_s in filtros){
-
-        console.log("MATCH")
-        console.log(filtros[k_s])
-        console.log(prop[k_s])
-        matches = matches && filtros[k_s].findIndex(f=>f===prop[k_s]) !== -1; //Revisar esto
-      }
-      return matches;
-    })
-    setSimilaresSeleccionadas(props);
-  }
+  const resetFilters = () => setFiltros(filtrosEstructura);
 
   const toggleFiltro = (filtro, valor) => {
     console.log(filtro);
@@ -300,6 +286,16 @@ function Resultados({resultados, user}) {
         { (filtros && filtrosEstructura) &&//filtros.length &&
           <div className="flex-row">
             {
+              filtros['metros'] ? (<div className="double-row"><CheckBoxList {...{
+                nombre: toSentenceCase('metros'),
+                estados: filtrosEstructura['metros'],
+                estados_seleccionados: filtros['metros'],
+                fcambio: (e) => toggleFiltro('metros',e),
+                estaAbierto: filtroAbierto === 'metros',
+                seleccionarFiltro : () => setFiltroAbierto(filtroAbierto === 'metros' ? '' : 'metros'), 
+              }}/></div>) : <></>
+            }            
+            {
               list_filtros_nombres.map(f=>filtros[f] ? (<CheckBoxList {...{
                 nombre: toSentenceCase(f),
                 estados: filtrosEstructura[f],
@@ -308,6 +304,16 @@ function Resultados({resultados, user}) {
                 estaAbierto: filtroAbierto === f,
                 seleccionarFiltro : () => setFiltroAbierto(filtroAbierto === f ? '' : f), 
               }}/>) : <></>)
+            }
+            { filtros['metros'] ?
+              <div className="max-height double-row">
+                <button
+                  className="bg-sky-800 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 max-height"
+                  onClick={resetFilters}
+                  >
+                  Limpiar filtros
+                </button> 
+              </div> : <></>
             }
           </div>
         }
