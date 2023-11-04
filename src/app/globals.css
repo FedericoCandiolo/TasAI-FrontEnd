@@ -410,3 +410,36 @@ nextjs-portal {
 .semibold{
   font-weight: 500;
 }
+
+.spacebetween{
+  justify-content: space-between !important;
+}
+
+.small {
+  font-size: small !important;
+}
+
+.smaller {
+  font-size: smaller !important;
+}
+
+.buttonretasar{
+  width: 8rem;
+  padding: 0.25rem;
+}
+
+.sizefirstpart{
+  width: 8rem !important;
+}
+
+.DivWithScrollTas {
+  display: block !important;
+  height:5.5rem;
+  margin-right: 2.5rem;
+  overflow:scroll;
+  overflow-x:hidden;
+}
+
+.bottom1rem{
+  margin-bottom: 1rem !important;
+}

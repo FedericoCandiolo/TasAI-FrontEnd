@@ -57,7 +57,7 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
         }} />
       ) : pagepart === "carga" ? (
         <CargaDatos {...{ 
-          btnsubmit: () => procesar(()=>setPagepart("resultados")),
+          btnsubmit: () => setPagepart("resultados"),
           btnCancelar: () => setPagepart("menu"), 
           fields: propiedad, 
           setFields: setPropiedad,

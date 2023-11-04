@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 
-function Tasacion({prop, tasaciones, btnEliminar}) {
+function Tasacion({prop, tasaciones, btnEliminar, setFields, btnsubmit}) {
     const [eliminado, estaEliminado] = useState(false);
 
     
@@ -9,7 +9,31 @@ function Tasacion({prop, tasaciones, btnEliminar}) {
 
   const handleRetasar = () => {
     //Guardo datos en propiedad, veo si borro un campo para actualizar. Actualizo setFields al final
-    //Pongo los campos con los nombres de la bbdd si corresponde
+    const property = {
+      calle: prop.calle,
+      numero: prop.numero,
+      ambientes: prop.ambientes,
+      banios: prop.baños,
+      dormitorios: prop.dormitorios,
+      pileta: prop.pileta,
+      parrilla: prop.parrilla,
+      jardin: prop.jardin,
+      latitud: prop.latitud, 
+      longitud: prop.longitud, 
+      esta_guardado: true,
+      m2: prop.metros,
+      cocheras: prop.cochera,
+      ciudad: toSentenceCase(prop.ciudad),
+      toilette: prop.toilette,
+      lavadero: prop.lavadero,
+      ac: prop.AC,
+      balcon: prop.balcon,
+      id_propiedad: prop.id,
+      id_usuario: prop.id_usuario
+    }
+
+    setFields({...property});
+    btnsubmit();
   }
   const handleEliminar = () => {
     //Elimino guardado prop
@@ -61,20 +85,22 @@ function Tasacion({prop, tasaciones, btnEliminar}) {
   }
 
   return (
-    <div className='inline'>
+    <div className='inline spacebetween bottom1rem'>
         <div>
             <h3 className='bold'>{prop.calle} {prop.numero}, {toSentenceCase(prop.ciudad)}</h3>
+        </div>
+        <div>
             {(tasaciones && tasaciones.length > 0 ) && 
             <div>
-                <h4 className='semibold'>Tasaciones:</h4>
-                <table className='DivWithScroll tabtas'>
+                <h4 className='semibold smaller sizefirstpart'>Tasaciones:</h4>
+                <table className='DivWithScrollTas tabtas'>
                 {
                     tasaciones
                     .reverse()
                     .map(tas=> //FALTA FORMATO Y BOTON DE BORRAR Y RETASAR
                         <tr>
-                        <td>{tas.fecha}</td>
-                        <td>{Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                        <td className='small'>{tas.fecha}</td>
+                        <td className='small'>{Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
                         .format(tas.precio)}</td>
                         </tr>
                     )
@@ -85,14 +111,14 @@ function Tasacion({prop, tasaciones, btnEliminar}) {
         </div>
         <div>
           <button
-            className="block w-full bg-sky-800 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            className="buttonretasar block w-full bg-sky-800 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
             onClick={handleRetasar}
           >
             Volver a tasar
           </button>
           <button
             type="submit"
-            className="block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
+            className="buttonretasar block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
             onClick={handleEliminar}
           >
             Eliminar

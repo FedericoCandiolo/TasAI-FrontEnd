@@ -14,7 +14,8 @@ function Resultados({resultados, user}) {
   const [similaresSeleccionadas, setSimilaresSeleccionadas] = useState([]);
   const [filtros, setFiltros] = useState([]);
   const [filtrosEstructura, setFiltrosEstructura] = useState([]);
-  const [filtroAbierto, setFiltroAbierto] = useState('')
+  const [filtroAbierto, setFiltroAbierto] = useState('');
+  const [procesando, setProcesando] = useState(true);
 
   const toSentenceCase = v => v[0].toUpperCase().concat(v.substring(1));
 
@@ -107,6 +108,30 @@ function Resultados({resultados, user}) {
               console.error('Error al obtener los datos:', error);
           });
 
+      } else if(!propiedad.precio){      
+        const apiUrl = `http://localhost:8000/tasacion-propiedad-existente/${propiedad.id_propiedad}/`;
+             
+          
+          const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          };
+
+        // Realizar una solicitud GET a la API utilizando fetch()
+          fetch(apiUrl, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+            setData(data); // Actualizar el estado con los datos recibidos de la API
+            //window.alert(data);
+            console.log("PRECIO");
+            console.log(data);
+            setPropiedad({...propiedad, precio: data.precio, id_tasacion: data.id})
+            console.log(propiedad)
+            })
+          .then(data=>console.log(data))
+          .catch((error) => {
+              console.error('Error al obtener los datos:', error);
+          });      
       } else if(!propiedad.similares){            
           //window.alert('Buscando similares')
           //const apiUrlSimilares = "http://localhost:8000/propiedades-similares/1/"; //Poner dinamico 
@@ -182,6 +207,7 @@ function Resultados({resultados, user}) {
           return matches;
         })
         setSimilaresSeleccionadas(props);
+        setProcesando(false);
       }     
     }, [propiedad,filtros]); // Ejecuta esto solo una vez al montar el componente
   ////FIN FETCH
@@ -265,7 +291,7 @@ function Resultados({resultados, user}) {
     setFiltros(nuevos_filtros);
     //refreshPropsSeleccionadas(); // No espera al cambio, corregir
   }
-
+  if(procesando) return <Processing />;
   return (
     <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
       <div class="space-y-12 space-from-header" >

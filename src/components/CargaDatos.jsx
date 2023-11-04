@@ -10,13 +10,14 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
   const [data, setData] = useState(undefined);
   const [propiedades, setPropiedades] = useState([]);
   const [tasaciones, setTasaciones] = useState([]);
+  const [buscoPropiedades, setBuscoPropiedades] = useState(false);
   const [buscoTasaciones, setBuscoTasaciones] = useState(false);
   
   useEffect(()=>{
     if(fields){
       setFields({});
     }
-    if(!propiedades || propiedades.length === 0) {
+    if(!buscoPropiedades) {
 
       const apiUrlProps = `http://localhost:8000/propiedades-de-usuario/${user.id_usuario}/`;
         
@@ -40,6 +41,9 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
       .catch((error) => {
           console.error('Error al obtener los datos:', error);
       });
+
+      setBuscoPropiedades(true);
+
     } else if(!buscoTasaciones) {
       const apiUrlTasaciones = `http://localhost:8000/tasaciones-de-usuario/${user.id_usuario}/`;
         
@@ -109,7 +113,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                   prop, 
                   tasaciones: tasaciones.filter((tas)=>tas.id_propiedad === prop.id),
                   btnEliminar: () => setPropiedades([...propiedades.filter(p=>p.id!== prop.id)]),
-                  
+                  setFields, 
+                  btnsubmit
                 }} />
               )
             ) : (
