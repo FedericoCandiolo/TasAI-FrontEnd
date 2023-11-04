@@ -87,27 +87,32 @@ function Menu({setPagepart,user,setUser}) {
   } else setPagepart('login');
 
   return (
-    <div className='centerinpage'>
-      {user.id_usuario ? 
-      <>
+    <div className='fondocaece'>
+      
+      <div className=' stickleft'>
+      {/* <div className='centerinpage stickleft'> */}
+        {user.id_usuario ? 
+        <>
+          <button
+          type="submit"
+          className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
+          onClick={()=>setPagepart('carga')}
+          >
+          Tasar nueva propiedad
+        </button>
         <button
-        type="submit"
-        className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
-        onClick={()=>setPagepart('carga')}
-        >
-        Tasar nueva propiedad
-      </button>
-      <button
-        type="submit"
-        className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
-        onClick={()=>setPagepart('login')}
-        >
-        Cerrar sesión
-      </button>
-        </>
-      
-      
-      : <p></p>}
+          type="submit"
+          className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
+          onClick={()=>setPagepart('login')}
+          >
+          Cerrar sesión
+        </button>
+          </>
+        
+        
+        : <p></p>}
+      </div>
+    
     </div>
   )
 }

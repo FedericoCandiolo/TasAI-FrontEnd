@@ -17,7 +17,8 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
     })
   };
 
-  const handleSuscripcion = () => {
+  const handleSuscripcion = (e) => {
+    e.preventDefault() 
     console.log(fields)
     if(isValid){
       
@@ -58,8 +59,8 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
         fields.cvvtarjeta.length === 3  ? "" : "CVV, "
       }`.slice(0,-2);
       window.alert(msg);
-      window.alert(fields.numerotarjeta.length);
-      window.alert(fields.cvvtarjeta.length);
+      //window.alert(fields.numerotarjeta.length);
+      //window.alert(fields.cvvtarjeta.length);
     }
   }
 
@@ -128,7 +129,7 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
                     classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
                     cod: "numerotarjeta",
                     labeltext: "Número de la tarjeta",
-                    ph: "0000 0000 0000 0000",
+                    ph: "0000000000000000",
                     tt: "Número de tarjeta válido de Visa o MasterCard",
                   }}
                   {...{valor: fields["numerotarjeta"]}}{...{actualizarDato: (v)=>handleField("numerotarjeta",v)}}

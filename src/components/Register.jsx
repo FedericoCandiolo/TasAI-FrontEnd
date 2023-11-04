@@ -17,10 +17,11 @@ function Register({ btnRegister,btnLogin,user, setUser,leermas, toggleLeerMas  }
     //console.log(user)
   }
 
-  const handleRegister = () => {
-    window.alert("Registrado");    
+  const handleRegister = (e) => {
+    e.preventDefault();
     //console.log(user);
     if(user.pwd === user.confirm_pwd){
+      window.alert("Registrado");    
       btnRegister();
     }
     else{

@@ -10,11 +10,14 @@ import Processing from "./Processing";
 import Menu from "./Menu";
 import CreditCardForm from "./CreditCardForm";
 
-export default function Main({ pagepart, setPagepart, user, setUser }) {
-  //const [pagepart, setPagepart] = useState("login");
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
   const [propiedad, setPropiedad] = useState({});
   const [leermas, setLeerMas] = useState(false);
+
+  const setPagepart = v => {
+    if(v==='carga') setPropiedad({});
+    setPagepartRaw(v);
+  }
 
   const procesar = (f) => {
     const prop = propiedad;
@@ -54,10 +57,11 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
         }} />
       ) : pagepart === "carga" ? (
         <CargaDatos {...{ 
-          btnsubmit: () => procesar(()=>setPagepart("resultados")),
+          btnsubmit: () => setPagepart("resultados"),
           btnCancelar: () => setPagepart("menu"), 
           fields: propiedad, 
-          setFields: setPropiedad
+          setFields: setPropiedad,
+          user
         }} />
       ) : pagepart === "menu" ? (
         <Menu {...{ setPagepart ,user,setUser}} />
@@ -66,7 +70,10 @@ export default function Main({ pagepart, setPagepart, user, setUser }) {
           {...{
             resultados: {
               ...propiedad, 
-              btnNuevaTasacion: () => setPagepart("carga"),
+              btnNuevaTasacion: () => {
+                setPropiedad({});
+                setPagepart("carga");
+              },
             },
             user
           }}
