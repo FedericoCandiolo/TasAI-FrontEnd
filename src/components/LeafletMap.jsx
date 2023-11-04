@@ -63,7 +63,7 @@ export default function LeafletMap({ propiedad }) {
             <Marker position={m.geocode} icon={ComparacionIcon}>
               <Popup>
                 <div className="grid2col">
-                  <p>{propiedad.m2} metros cuadrados</p>
+                  <p>{m.popUp.metros} metros cuadrados</p>
                   <p>{m.popUp.ambientes} { m.popUp.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>
                   <p>{m.popUp.dormitorios} { m.popUp.dormitorios === 1 ? 'dormitorio' : 'dormitorios'}</p>
                   <p>{m.popUp.cochera} { m.popUp.cochera === 1 ? 'cochera' : 'cocheras'}</p>
