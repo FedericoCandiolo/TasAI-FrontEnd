@@ -370,3 +370,43 @@ nextjs-portal {
 .double-row {
   grid-row: 1 / span 2;
 }
+
+.row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.padding-hor{
+  margin: 0 1vw;
+}
+
+.tasaciones{
+  height: 75.5vh !important;
+  padding: 0.5rem;
+}
+
+.no-margin-left{
+  margin-left: 0;
+}
+
+.margin-top{
+  margin-top: 0.5rem !important;
+}
+
+.tabtas{
+  height: fit-content; 
+}
+
+.tabtas td {
+  width: 7rem !important;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.semibold{
+  font-weight: 500;
+}

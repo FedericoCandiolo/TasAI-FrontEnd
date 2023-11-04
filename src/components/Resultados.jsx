@@ -71,7 +71,7 @@ function Resultados({resultados, user}) {
           jardin: propiedad.jardin,
           latitud: propiedad.latitud, 
           longitud: propiedad.longitud, 
-          esta_guardado: true,
+          esta_guardado: false,
           metros: propiedad.m2,
           cochera: propiedad.cocheras,
           ciudad: propiedad.ciudad.toLowerCase(),
@@ -99,7 +99,7 @@ function Resultados({resultados, user}) {
             //window.alert(data);
             console.log("PRECIO");
             console.log(data);
-            setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad})
+            setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad, id_tasacion: data.id})
             console.log(propiedad)
             })
           .then(data=>console.log(data))
@@ -205,7 +205,45 @@ function Resultados({resultados, user}) {
   console.log(resultados)
 
   const handleSave = () => {
-    window.alert("Propiedad guardada");
+    window.alert("Tasación guardada.");
+    const apiUrlProp = `http://localhost:8000/esta-guardado-propiedad/${propiedad.id_propiedad}/`;
+    const apiUrlTasacion = `http://localhost:8000/esta-guardado-tasacion/${propiedad.id_tasacion}/`;
+        
+    const property = {
+      esta_guardado: true
+    }
+
+    console.log(
+      JSON.stringify(property)
+    )
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(property),
+    };
+
+    // Realizar una solicitud GET a la API utilizando fetch()
+      fetch(apiUrlProp, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+        setPropiedad({...propiedad, esta_guardado: true})
+        //window.alert('Propiedad guardada.')
+        })
+      .then(data=>console.log(data))
+      .catch((error) => {
+          console.error('Error al obtener los datos:', error);
+      });
+
+      fetch(apiUrlTasacion, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+        setPropiedad({...propiedad, esta_guardado: true})
+        //window.alert('Propiedad guardada.')
+        })
+      .then(data=>console.log(data))
+      .catch((error) => {
+          console.error('Error al obtener los datos:', error);
+      });
   }
 
   const handleVolver = () => {
@@ -267,13 +305,16 @@ function Resultados({resultados, user}) {
           >
             Nueva Tasación
           </button>
+          
           <button
-            type="button"
-            class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            onClick={handleSave}
+          type="button"
+          class="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          onClick={handleSave}
+          disable={!(propiedad && propiedad.id_propiedad)}
           >
-            Guardar Propiedad
-          </button>
+          Guardar Tasación
+        </button>
+
         </div>  
           </article>   
           

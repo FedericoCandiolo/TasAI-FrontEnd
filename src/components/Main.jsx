@@ -60,7 +60,8 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
           btnsubmit: () => procesar(()=>setPagepart("resultados")),
           btnCancelar: () => setPagepart("menu"), 
           fields: propiedad, 
-          setFields: setPropiedad
+          setFields: setPropiedad,
+          user
         }} />
       ) : pagepart === "menu" ? (
         <Menu {...{ setPagepart ,user,setUser}} />
