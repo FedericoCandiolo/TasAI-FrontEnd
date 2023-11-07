@@ -1,16 +1,20 @@
 "use client";
 
 import { useState, React, useEffect } from "react";
-import LeerMas from './LeerMas'
+import LeerMas from "./LeerMas";
 // import RootLayout from "@/app/layout";
 
-function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
-
-  useEffect(()=>{
-    setUser({origen:'login'});
-  },[])
-
-  
+function Login({
+  btnLogin,
+  btnRegister,
+  user,
+  setUser,
+  leermas,
+  toggleLeerMas,
+}) {
+  useEffect(() => {
+    setUser({ origen: "login" });
+  }, []);
 
   const handleLogIn = () => {
     window.alert("Iniciando sesión.");
@@ -20,13 +24,13 @@ function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
   };
 
   const handleChange = (e) => {
-    const newuser = {...user};
+    const newuser = { ...user };
     //console.log(e)
     newuser[e.target.id] = e.target.value;
     //newuser[e.target.getAttribute('id')] = e.target.value;
-    setUser({...newuser})
+    setUser({ ...newuser });
     //console.log(user)
-  }
+  };
 
   const handleRegister = () => {
     // window.alert("Register");
@@ -38,13 +42,13 @@ function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">TasAI</h1>
           <p className="text-white mt-1"> El tasador del futuro</p>
-          {leermas && <LeerMas/>}
+          {leermas && <LeerMas />}
           <button
             //type="submit"
             className="block w-28 bg-white text-sky-800 mt-4 py-2 rounded-2xl font-bold mb-2"
             onClick={toggleLeerMas}
           >
-            {leermas ? 'Leer Menos' : 'Leer Más'}
+            {leermas ? "Leer Menos" : "Leer Más"}
           </button>
         </div>
       </div>
@@ -55,7 +59,7 @@ function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-gray-400 fill-gray-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -64,7 +68,7 @@ function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z"
               />
             </svg>
             <input
@@ -94,7 +98,7 @@ function Login({ btnLogin, btnRegister,user, setUser,leermas, toggleLeerMas }) {
               type="password"
               name=""
               id="pwd"
-              placeholder="Contraseña"              
+              placeholder="Contraseña"
               onChange={handleChange}
             />
           </div>
