@@ -1,46 +1,56 @@
 "use client";
 
-import { useState, React, useEffect } from "react";
+import { useState } from "react";
 import LeerMas from "./LeerMas";
-// import RootLayout from "@/app/layout";
 
-function Login({
-  btnLogin,
-  btnRegister,
-  user,
-  setUser,
+export default function OlvidoContrasena({
+  btnRecuperarContrasena,
   leermas,
   toggleLeerMas,
-  btnOlvideContrasena,
 }) {
-  useEffect(() => {
-    setUser({ origen: "login" });
-  }, []);
+  const [userName, setUserName] = useState();
+  const [data, setData] = useState();
 
-  const handleLogIn = () => {
-    window.alert("Iniciando sesión.");
-    //console.log(user);
-    btnLogin();
-    //console.log(user);
+  const recuperarContrasenaAPI = () => {
+    const API_URL = `http://localhost:8000/contraseña-mail/${userName.username}/`;
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(API_URL, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        //window.alert(data);
+      })
+      .catch((error) => {
+        window.alert("error");
+        console.error("Error al obtener los datos:", error);
+      });
   };
-
   const handleChange = (e) => {
-    const newuser = { ...user };
+    const userName = {};
     //console.log(e)
-    newuser[e.target.id] = e.target.value;
+    userName[e.target.id] = e.target.value;
     //newuser[e.target.getAttribute('id')] = e.target.value;
-    setUser({ ...newuser });
-    //console.log(user)
+    setUserName({ ...userName });
+    console.log(userName);
   };
 
-  const handleRegister = () => {
-    // window.alert("Register");
-    btnRegister();
+  const handleRecuperarContrasena = (e) => {
+    e.preventDefault();
+    recuperarContrasenaAPI();
+    window.alert(data);
+    btnRecuperarContrasena();
   };
 
-  const handleOlvideContrasena = () => {
-    btnOlvideContrasena();
+  const handleVolver = (e) => {
+    e.preventDefault();
+    btnRecuperarContrasena();
   };
+
   return (
     <div className="h-screen flex">
       <div className="flex w-3/4 bg-gradient-to-b from-teal-50 to-teal-800 i justify-around items-center">
@@ -59,8 +69,12 @@ function Login({
       </div>
       <div className="flex w-1/4 justify-center items-center bg-gradient-to-b ">
         <form className="bg-white align-middle">
-          <h1 className="text-gray-800 font-bold text-2xl mb-1">Hola!</h1>
-          <p className="text-sm font-normal text-gray-600 mb-7">Bienvenido/a</p>
+          <h1 className="text-gray-800 font-bold text-2xl mb-1">
+            Recuperar contraseña
+          </h1>
+          <p className="text-sm font-normal text-gray-600 mb-7">
+            Ingrese el usuario
+          </p>
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,48 +99,22 @@ function Login({
               onChange={handleChange}
             />
           </div>
-          <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-400"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <input
-              className="pl-2 outline-none border-none"
-              type="password"
-              name=""
-              id="pwd"
-              placeholder="Contraseña"
-              onChange={handleChange}
-            />
-          </div>
           <button
-            //type="submit"
+            type="submit"
             className="block w-full bg-sky-800 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
-            onClick={handleLogIn}
+            onClick={handleRecuperarContrasena}
           >
-            Iniciar Sesión
+            Recuperar Contraseña
           </button>
           <button
             type="submit"
             className="block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
-            onClick={handleRegister}
+            onClick={handleVolver}
           >
-            Registrarme
+            Volver a Inicio Sesión
           </button>
-          <p className="text-md text-center text-sky-500 hover:text-black-500 cursor-pointer">
-            <span onClick={handleOlvideContrasena}>Olvidé mi contraseña</span>
-          </p>
         </form>
       </div>
     </div>
   );
 }
-export default Login;

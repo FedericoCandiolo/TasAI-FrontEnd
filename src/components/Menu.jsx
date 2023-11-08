@@ -112,6 +112,13 @@ function Menu({ setPagepart, user, setUser }) {
             <button
               type="submit"
               className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
+              onClick={() => setPagepart("cambiarContrasena")}
+            >
+              Cambiar Contraseña
+            </button>
+            <button
+              type="submit"
+              className="buttonspace block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
               onClick={() => setPagepart("login")}
             >
               Cerrar sesión
