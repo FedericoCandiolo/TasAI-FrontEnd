@@ -16,8 +16,8 @@ export default function CambiarContrasena({
   });
 
   useEffect(() => {
-    setNewPassword({ pwdActual: user.password });
-    setPassword(user.password);
+    //setNewPassword({ pwdActual: user.password });
+    setPassword(user.pwd);
   }, []);
 
   // API Cambiar contraseña
@@ -38,10 +38,12 @@ export default function CambiarContrasena({
     fetch(API_URL, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        window.alert(data);
+        window.alert("Contraseña cambiada con éxito");
+        btnCambiarContrasena(newPassword.pwdActual);
       })
       .catch((error) => {
-        window.alert("error");
+        //window.alert("error");
+        window.alert("Contraseña incorrecta.")
         console.error("Error al obtener los datos:", error);
       });
   };
@@ -57,11 +59,11 @@ export default function CambiarContrasena({
     e.preventDefault();
     //console.log(user);
 
-    if (newPassword.pwdNueva === newPassword.confirm_pwd) {
+    if (newPassword.pwdNueva === newPassword.confirm_pwd ) {
       cambiarContrasenaAPI();
-      btnCambiarContrasena();
+      // btnCambiarContrasena();
     } else {
-      window.alert("La contraseña nueva y la confirmación no coinciden");
+      window.alert("La contraseña nueva y la confirmación no coinciden.");
     }
   };
 
@@ -157,7 +159,6 @@ export default function CambiarContrasena({
               />
             </div>
             <button
-              type="submit"
               className="block w-full bg-transparent border border-sky-800 mt-4 py-2 rounded-2xl text-sky-800 font-semibold mb-2"
               onClick={handleCambioContrasena}
             >

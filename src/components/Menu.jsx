@@ -3,7 +3,11 @@ import { React, useState, useEffect } from "react";
 
 function Menu({ setPagepart, user, setUser }) {
   const [data, setData] = useState([]);
-  if (user.origen === "login") {
+  
+  if (user.status === "ok" ) {
+    console.log('OK');
+    useEffect(()=>{},[]);
+  } else if (user.origen === "login") {
     useEffect(() => {
       // URL de la API que deseas consultar
 

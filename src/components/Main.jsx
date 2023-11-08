@@ -81,7 +81,10 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
       ) : pagepart === "cambiarContrasena" ? (
         <CambiarContrasena
           {...{
-            btnCambiarContrasena: () => setPagepart("login"),
+            btnCambiarContrasena: (password) => {
+              setUser({...user,pwd: password});
+              setPagepart("menu");
+            },
             user,
             leermas,
             toggleLeerMas: () => setLeerMas(!leermas),

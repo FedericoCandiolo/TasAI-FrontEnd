@@ -24,9 +24,10 @@ export default function OlvidoContrasena({
       .then((data) => {
         setData(data);
         //window.alert(data);
+        window.alert("Se ha enviado la nueva contraseña al correo asociado.")
       })
       .catch((error) => {
-        window.alert("error");
+        //window.alert("error");
         console.error("Error al obtener los datos:", error);
       });
   };
@@ -42,7 +43,7 @@ export default function OlvidoContrasena({
   const handleRecuperarContrasena = (e) => {
     e.preventDefault();
     recuperarContrasenaAPI();
-    window.alert(data);
+    //window.alert(data);
     btnRecuperarContrasena();
   };
 
