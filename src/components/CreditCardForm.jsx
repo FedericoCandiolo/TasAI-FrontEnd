@@ -45,7 +45,7 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
       });
     ////FIN FETCH
 
-      btnCargar();
+      btnCargar(2);
     }
     else{
       const msg = `Tarjeta inválida. Errores en: ${
@@ -88,7 +88,7 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
     });
   ////FIN FETCH
 
-    btnCargar();
+    btnCargar(1);
   }
 
   const isVisa = /^4[0-9]{12}(?:[0-9]{3})?$/.test(fields.numerotarjeta);
@@ -179,14 +179,26 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
                     >
                     Volver
                   </button>
-                  <button
-                    type="submit"
-                    /*  disabled={!isValid} */
-                    onClick={handleSuscripcion}
-                    className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                    Suscribirme
-                  </button>
+                  {
+                    isValid 
+                  ?
+                    <button
+                      type="submit"
+                      /*  disabled={!isValid} */
+                      onClick={handleSuscripcion}
+                      className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                      Suscribirme
+                    </button>
+                  :
+                    <button
+                      type="submit"
+                      disabled
+                      className="disabled rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                      Suscribirme
+                    </button>
+                  }
                 </div>
               </div>
             :

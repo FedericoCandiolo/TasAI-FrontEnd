@@ -12,6 +12,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
   const [tasaciones, setTasaciones] = useState([]);
   const [buscoPropiedades, setBuscoPropiedades] = useState(false);
   const [buscoTasaciones, setBuscoTasaciones] = useState(false);
+  const [estaCompleto,setEstaCompleto] = useState(false); 
   
   useEffect(()=>{
     if(fields){
@@ -77,12 +78,18 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
 
   },[ propiedades, tasaciones ])
 
+  const refrescarCompleto = () => {
+    const campos = ['calle','numero','ciudad',"m2","ambientes","dormitorios","cocheras","banios"];
+    setEstaCompleto(fields && campos.reduce((acc,el)=>acc && fields[el],true))
+  }
+
   const handleField = (cod_item, val_item) => {
     const new_fields = fields;
     fields[cod_item] = val_item;
     setFields({
       ...new_fields,
     })
+    refrescarCompleto();
   };
 
   const handleTasar = () => {
@@ -130,7 +137,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                 Nueva tasación
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600 ml-2 space-below">
-                Ingrese los datos de la propiedad a tasar.
+                Ingrese todos los datos de la propiedad a tasar.
               </p>
 
               <FieldTasacion
@@ -278,13 +285,27 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
             >
               Cancelar
             </button>
-            <button
-              type="submit"
-              onClick={handleTasar}
-              className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Tasar
-            </button>
+            {
+              estaCompleto
+            ?
+              <button
+                type="submit"
+                onClick={handleTasar}
+                className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Tasar
+              </button>
+            :
+              <button
+                type="submit"
+                disabled
+                onClick={handleTasar}
+                className="disabled rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Tasar
+              </button>
+            }
+            
           </div>
         </form>
       </div>

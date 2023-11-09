@@ -15,7 +15,7 @@ function CheckBoxList({nombre, estados, estados_seleccionados, fcambio, estaAbie
                         <div className="checkboxes" /* style={{display: expanded ? 'block' : 'none'}} */>
                             {
                                 estados.map(e=><>
-                                    <label htmlFor={`${nombre}_${e}`}>
+                                    <label htmlFor={`${nombre}_${e}`} className="width11vw">
                                         {
                                         estados_seleccionados.filter(f=>f===e).length > 0 
                                         ? 

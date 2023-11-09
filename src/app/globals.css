@@ -111,6 +111,12 @@ body {
   grid-template-rows: 3em 2em 2em 2em 2em;
 }
 
+.grid2colextra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2em 3em 2em 2em 2em 2em;
+}
+
 .grid2col p{
   margin: 0;
   padding: 0;
@@ -125,6 +131,10 @@ body {
 .mapouter {
   padding: 2rem;
   border-radius: 1rem;
+}
+
+.disabled {
+  background-color: #555 !important;
 }
 
 .buttonspace{
@@ -371,6 +381,10 @@ nextjs-portal {
   grid-row: 1 / span 2;
 }
 
+.double-col {
+  grid-column: 1 / span 2;
+}
+
 .row{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -428,6 +442,10 @@ nextjs-portal {
   padding: 0.25rem;
 }
 
+.centertext{
+  text-align: center;
+}
+
 .sizefirstpart{
   width: 8rem !important;
 }
@@ -442,4 +460,8 @@ nextjs-portal {
 
 .bottom1rem{
   margin-bottom: 1rem !important;
+}
+
+.width11vw{
+  width: 11vw !important;
 }

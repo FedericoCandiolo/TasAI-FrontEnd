@@ -62,7 +62,11 @@ export default function LeafletMap({ propiedad }) {
             markers.map(m=>
             <Marker position={m.geocode} icon={ComparacionIcon}>
               <Popup>
-                <div className="grid2col">
+                <div className="grid2colextra">
+                  <p className="semibold double-col centertext"><strong>{
+                    Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                    .format(m.popUp.precio)
+                  }</strong></p>
                   <p>{m.popUp.metros} metros cuadrados</p>
                   <p>{m.popUp.ambientes} { m.popUp.ambientes === 1 ? 'ambiente' : 'ambientes'}</p>
                   <p>{m.popUp.dormitorios} { m.popUp.dormitorios === 1 ? 'dormitorio' : 'dormitorios'}</p>

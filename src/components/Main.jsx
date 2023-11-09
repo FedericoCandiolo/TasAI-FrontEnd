@@ -62,7 +62,10 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
         <CreditCardForm
           {...{
             btnVolver: () => setPagepart("menu"),
-            btnCargar: () => procesar(() => setPagepart("menu")),
+            btnCargar: (n) => procesar(() => {
+              setUser({...user,id_plan: n});
+              setPagepart("menu");
+            }),
             user,
           }}
         />
