@@ -293,18 +293,33 @@ function Resultados({resultados, user}) {
   }
   if(procesando) return <Processing />;
   return (
-    <div class="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
+    <div class="flex items-centrer h-screen bg-gradient-to-b from-teal-50 to-teal-800">{/* justify-center */}
       <div class="space-y-12 space-from-header" >
         <div class="border-b border-gray-900/10 pb-12 ">
-          <article class="box">
+          <article class="box height75vh padding-box">
             <h1>Propiedad</h1>         
             <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
               <h3>{`${propiedad.calle} ${propiedad.numero}, ${propiedad.ciudad}`}</h3>
               {propiedad.precio &&
-                <h2>{
-                  Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
-                  .format(data.precio)              
-                }</h2>
+                <div className="">
+                  <h2>{
+                    Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                    .format(data.precio)             
+                  }</h2>
+                  {
+                    (propiedad && propiedad.precioAnterior) &&
+                    data.precio > propiedad.precioAnterior ? 
+                      <h3 className="green smaller">Tasación previa: {Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                      .format(/*data.precio -*/ propiedad.precioAnterior)} ▲</h3>
+                    : (data.precio === propiedad.precioAnterior ? 
+                      <h3 className="smaller">Tasación previa: {Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                      .format(/*data.precio -*/ propiedad.precioAnterior)}</h3> 
+                    :
+                      <h3 className="red smaller">Tasación previa: {Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
+                      .format(/*data.precio -*/ propiedad.precioAnterior)} ▼</h3>
+                    )
+                  }
+                </div>
               }
               <div className="grid2col">
                 <p>{propiedad.m2} metros cuadrados</p>

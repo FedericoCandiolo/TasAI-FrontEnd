@@ -29,7 +29,8 @@ function Tasacion({prop, tasaciones, btnEliminar, setFields, btnsubmit}) {
       ac: prop.AC,
       balcon: prop.balcon,
       id_propiedad: prop.id,
-      id_usuario: prop.id_usuario
+      id_usuario: prop.id_usuario,
+      precioAnterior: tasaciones[tasaciones.length - 1].precio
     }
 
     setFields({...property});

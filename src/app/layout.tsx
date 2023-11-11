@@ -53,7 +53,7 @@ export default function RootLayout({
               <div className="inline absolute top-1/2 transform -translate-y-1/2 right-2">
                 <p>{user.status === 'ok' ? user.username : ""}</p>
                 {user.id_plan === 3 ?
-                  <a className=" bg-orange-400 text-white py-1 px-3 hover:bg-orange-300" href="http://localhost:8000/admin/">Adminisitrador</a>
+                  <a className=" bg-orange-400 text-white py-1 px-3 hover:bg-orange-300" href="http://localhost:8000/admin/">Administrador</a>
                 :
                   <button
                     className="bg-orange-400 text-white py-1 px-3 hover:bg-orange-300"

@@ -137,6 +137,10 @@ body {
   background-color: #555 !important;
 }
 
+.padding {
+  padding: 2rem 1.2rem;
+}
+
 .buttonspace{
   padding-left: 0.3rem !important;
   padding-right: 0.3rem !important;
@@ -146,11 +150,15 @@ body {
   background: #eee;
   position:absolute !important;
   width: 60vw;
-  height: 62vh !important;
+  height: 67vh !important;
   border-radius: 1rem;
   box-shadow: black 1rem 0.5 solid;
   z-index: 1;
   /* margin: rem;  */
+}
+
+.height75vh{
+  height: 75vh !important;
 }
 
 .space-from-header{
@@ -399,6 +407,14 @@ nextjs-portal {
 .tasaciones{
   height: 75.5vh !important;
   padding: 0.5rem;
+}
+
+.red{
+  color:#700;
+}
+
+.green{
+  color:#070;
 }
 
 .no-margin-left{
