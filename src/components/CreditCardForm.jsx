@@ -102,7 +102,8 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
     && (isVisa || isMastercard)
   );
 
-  return (
+  return (    
+    
     <div>
       {/* <div className="bg-white rounded-2xl ml-2 h-fit mt-20">
         <p>Plan Básico</p>
@@ -111,134 +112,151 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
         <p>Plan Premium</p>
       </div> */}
       <div className="flex items-centrer justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-800">
-        <form className="bg-white rounded-2xl ml-2 h-fit mt-20">
-          <div className="space-y-12">
-            {user.id_plan === 1 
-            ?
-              <div className="border-b border-gray-900/10 pb-12 DivWithScroll">
-                <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
-                  Suscripción al Plan Premium
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
-                  Ingrese los datos de tarjeta de crédito Visa o MasterCard
-                </p>
+        <div className='h-fit mt-20 grid2x2'>
+          <div className="bg-white rounded-2xl box-padding">
+            <h2 className='plantitle'>Plan Básico</h2>
+            <p className='plantext'>5 tasaciones totales</p>
+            <p className='plantext'>2 tasaciones guardadas</p>
+            <p className='bold planprice'>Gratis</p>
+          </div>
+          <div className='bg-white rounded-2xl box-padding'>
+            <h2 className='plantitle'>Plan Premium</h2>
+            <p className='plantext'>Tasaciones totales SIN LÍMITE</p>
+            <p className='plantext'>Tasaciones guardadas SIN LÍMITE</p>
+            <p className='bold planprice'>U$S 10 / mes</p>
+          </div>
+          <div className='double-col bg-white rounded-2xl box-padding'>
+            <form>
+              <div className="space-y-12">
+                {user.id_plan === 1 
+                ?
+                  <div >
+                    <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
+                      Suscripción al Plan Premium
+                    </h2>
+                    <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
+                      Ingrese los datos de tarjeta de crédito Visa o MasterCard
+                    </p>
 
-                <FieldTasacion
-                  {...{
-                    fieldtype: "string",
-                    classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                    cod: "numerotarjeta",
-                    labeltext: "Número de la tarjeta",
-                    ph: "0000000000000000",
-                    tt: "Número de tarjeta válido de Visa o MasterCard",
-                  }}
-                  {...{valor: fields["numerotarjeta"]}}{...{actualizarDato: (v)=>handleField("numerotarjeta",v)}}
-                  />
+                    <FieldTasacion
+                      {...{
+                        fieldtype: "string",
+                        classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                        cod: "numerotarjeta",
+                        labeltext: "Número de la tarjeta",
+                        ph: "0000000000000000",
+                        tt: "Número de tarjeta válido de Visa o MasterCard",
+                      }}
+                      {...{valor: fields["numerotarjeta"]}}{...{actualizarDato: (v)=>handleField("numerotarjeta",v)}}
+                      />
 
-                <FieldTasacion
-                  {...{
-                    fieldtype: "string",
-                    classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                    cod: "titulartarjeta",
-                    labeltext: "Titular de la tarjeta",
-                    ph: "Nombre Apellido",
-                    tt: "Nombre completo del titular como figura en la tarjeta",
-                  }}
-                  {...{valor: fields["titulartarjeta"]}}{...{actualizarDato: (v)=>handleField("titulartarjeta",v)}}
-                  />
+                    <FieldTasacion
+                      {...{
+                        fieldtype: "string",
+                        classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                        cod: "titulartarjeta",
+                        labeltext: "Titular de la tarjeta",
+                        ph: "Nombre Apellido",
+                        tt: "Nombre completo del titular como figura en la tarjeta",
+                      }}
+                      {...{valor: fields["titulartarjeta"]}}{...{actualizarDato: (v)=>handleField("titulartarjeta",v)}}
+                      />
 
-                <FieldTasacion
-                  {...{
-                    fieldtype: "string",
-                    classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                    cod: "fechatarjeta",
-                    labeltext: "Fecha de expiración",
-                    ph: "MMAA",
-                    tt: "Fecha en formato MMAA. Ejemplo: 0728 (Julio 2028)",
-                  }}
-                  {...{valor: fields["fechatarjeta"]}}{...{actualizarDato: (v)=>handleField("fechatarjeta",v)}}
-                  />
+                    <FieldTasacion
+                      {...{
+                        fieldtype: "string",
+                        classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                        cod: "fechatarjeta",
+                        labeltext: "Fecha de expiración",
+                        ph: "MMAA",
+                        tt: "Fecha en formato MMAA. Ejemplo: 0728 (Julio 2028)",
+                      }}
+                      {...{valor: fields["fechatarjeta"]}}{...{actualizarDato: (v)=>handleField("fechatarjeta",v)}}
+                      />
 
-                <FieldTasacion
-                  {...{
-                    fieldtype: "string",
-                    classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                    cod: "cvvtarjeta",
-                    labeltext: "CVV",
-                    ph: "000",
-                    tt: "Código de seguridad (por lo general en el anverso de la tarjeta)",
-                  }}
-                  {...{valor: fields["cvvtarjeta"]}}{...{actualizarDato: (v)=>handleField("cvvtarjeta",v)}}
-                />
+                    <FieldTasacion
+                      {...{
+                        fieldtype: "string",
+                        classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
+                        cod: "cvvtarjeta",
+                        labeltext: "CVV",
+                        ph: "000",
+                        tt: "Código de seguridad (por lo general en el anverso de la tarjeta)",
+                      }}
+                      {...{valor: fields["cvvtarjeta"]}}{...{actualizarDato: (v)=>handleField("cvvtarjeta",v)}}
+                    />
+                    
+                    <div className="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
+                      <button
+                        type="button"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                        onClick={btnVolver}
+                        >
+                        Volver
+                      </button>
+                      {
+                        isValid 
+                      ?
+                        <button
+                          type="submit"
+                          /*  disabled={!isValid} */
+                          onClick={handleSuscripcion}
+                          className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          >
+                          Suscribirme
+                        </button>
+                      :
+                        <button
+                          type="submit"
+                          disabled
+                          className="disabled rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          >
+                          Suscribirme
+                        </button>
+                      }
+                    </div>
+                  </div>
+                :
+                  <div>
+                    <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
+                      Desuscripción del Plan Premium
+                    </h2>
+                    <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
+                      ¿Desea desuscribirse del plan premium? Las propiedades y tasaciones guardadas que superen el límite podrían ser eliminadas permamentemente. 
+                    </p>
+                    <div className="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
+                      <button
+                        type="button"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                        onClick={btnVolver}
+                        >
+                        Volver
+                      </button>
+                      <button
+                        type="submit"
+                        /*  disabled={!isValid} */
+                        onClick={handleDesuscripcion}
+                        className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >
+                        Desuscribirme
+                      </button>
+                    </div>
+                  </div>
+                }
                 
-                <div className="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
-                  <button
-                    type="button"
-                    className="text-sm font-semibold leading-6 text-gray-900"
-                    onClick={btnVolver}
-                    >
-                    Volver
-                  </button>
-                  {
-                    isValid 
-                  ?
-                    <button
-                      type="submit"
-                      /*  disabled={!isValid} */
-                      onClick={handleSuscripcion}
-                      className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                      Suscribirme
-                    </button>
-                  :
-                    <button
-                      type="submit"
-                      disabled
-                      className="disabled rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                      Suscribirme
-                    </button>
-                  }
-                </div>
-              </div>
-            :
-              <div>
-                <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2">
-                  Desuscripción del Plan Premium
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600 ml-2">
-                  ¿Desea desuscribirse del plan premium? Las propiedades y tasaciones guardadas que superen el límite podrían ser eliminadas permamentemente. 
-                </p>
-                <div className="mt-6 flex items-center justify-end gap-x-6 mr-2 mb-2">
-                  <button
-                    type="button"
-                    className="text-sm font-semibold leading-6 text-gray-900"
-                    onClick={btnVolver}
-                    >
-                    Volver
-                  </button>
-                  <button
-                    type="submit"
-                    /*  disabled={!isValid} */
-                    onClick={handleDesuscripcion}
-                    className="rounded-md bg-sky-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                    Desuscribirme
-                  </button>
-                </div>
-              </div>
-            }
-            
-                
-            {/* {isVisa && <p className="visa">Visa</p>}
-            {isMastercard && <p className="mastercard">Mastercard</p>} */}
+                    
+                {/* {isVisa && <p className="visa">Visa</p>}
+                {isMastercard && <p className="mastercard">Mastercard</p>} */}
 
-          </div> 
+              </div> 
 
-          
-        </form>
+              
+            </form>
+          </div>
+        </div>
       </div>
     </div>
+      
   );
   
 };

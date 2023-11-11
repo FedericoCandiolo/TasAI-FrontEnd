@@ -389,8 +389,21 @@ nextjs-portal {
   grid-row: 1 / span 2;
 }
 
+.box-padding {
+  padding: 1rem;
+}
+
 .double-col {
   grid-column: 1 / span 2;
+}
+
+.grid2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5vh;
+  height: 75vh;
+  width: 75vw;
+  text-align: center;
 }
 
 .row{
@@ -480,4 +493,20 @@ nextjs-portal {
 
 .width11vw{
   width: 11vw !important;
+}
+
+.plantitle{
+  font-size: x-large;
+  font-weight: 500;
+}
+
+.plantext {
+  font-size: large;
+  font-weight: 500;
+}
+
+.planprice {
+  font-size: xx-large;
+  font-weight: 600;
+  color: #115d59;
 }
