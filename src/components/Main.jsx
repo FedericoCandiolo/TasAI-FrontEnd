@@ -108,9 +108,10 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
               btnNuevaTasacion: () => {
                 setPropiedad({});
                 setPagepart("carga");
-              },
+              },              
             },
             user,
+            toSuscripcion : () => setPagepart('premium'),
           }}
         />
       ) : pagepart === "procesando" ? (

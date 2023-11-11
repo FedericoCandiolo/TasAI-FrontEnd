@@ -7,7 +7,7 @@ import LeafletMap from './LeafletMap'
 import CheckBoxList from './CheckBoxList'
 import Processing from './Processing'
 
-function Resultados({resultados, user}) {
+function Resultados({resultados, user, toSuscripcion}) {
   ////INICIO FETCH
   const [data, setData] = useState([]);
   const [propiedad, setPropiedad] = useState({...resultados,direccion: `${resultados.calle} ${resultados.numero}`});
@@ -100,12 +100,22 @@ function Resultados({resultados, user}) {
             //window.alert(data);
             console.log("PRECIO");
             console.log(data);
+            if(data.message === 'Tasaciones máximas de plan alcanzadas' || 
+            data.message === 'Guardados máximos de plan alcanzados'){
+              window.alert(`${data.message}.`);
+              toSuscripcion();
+            }
             setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad, id_tasacion: data.id})
             console.log(propiedad)
             })
           .then(data=>console.log(data))
           .catch((error) => {
-              console.error('Error al obtener los datos:', error);
+            if(error.message === 'Tasaciones máximas de plan alcanzadas' || 
+               error.message === 'Guardados máximos de plan alcanzados'){
+              window.alert(`${error.message}.`);
+              toSuscripcion();
+            }
+            else console.error('Error al obtener los datos:', error);
           });
 
       } else if(!propiedad.precio){      
@@ -125,12 +135,22 @@ function Resultados({resultados, user}) {
             //window.alert(data);
             console.log("PRECIO");
             console.log(data);
+            if(data.message === 'Tasaciones máximas de plan alcanzadas' || 
+            data.message === 'Guardados máximos de plan alcanzados'){
+              window.alert(`${data.message}.`);
+              toSuscripcion();
+            }
             setPropiedad({...propiedad, precio: data.precio, id_tasacion: data.id})
             console.log(propiedad)
             })
           .then(data=>console.log(data))
           .catch((error) => {
-              console.error('Error al obtener los datos:', error);
+            if(error.message === 'Tasaciones máximas de plan alcanzadas' || 
+                error.message === 'Guardados máximos de plan alcanzados'){
+              window.alert(`${error.message}.`);
+              toSuscripcion();
+            }
+              else console.error('Error al obtener los datos:', error);
           });      
       } else if(!propiedad.similares){            
           //window.alert('Buscando similares')
@@ -231,7 +251,6 @@ function Resultados({resultados, user}) {
   console.log(resultados)
 
   const handleSave = () => {
-    window.alert("Tasación guardada.");
     const apiUrlProp = `http://localhost:8000/esta-guardado-propiedad/${propiedad.id_propiedad}/`;
     const apiUrlTasacion = `http://localhost:8000/esta-guardado-tasacion/${propiedad.id_tasacion}/`;
         
@@ -248,28 +267,54 @@ function Resultados({resultados, user}) {
       body: JSON.stringify(property),
     };
 
-    // Realizar una solicitud GET a la API utilizando fetch()
-      fetch(apiUrlProp, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-        setPropiedad({...propiedad, esta_guardado: true})
-        //window.alert('Propiedad guardada.')
-        })
-      .then(data=>console.log(data))
-      .catch((error) => {
-          console.error('Error al obtener los datos:', error);
-      });
+    let ok = true;
 
+    // Realizar una solicitud GET a la API utilizando fetch()
       fetch(apiUrlTasacion, requestOptions)
         .then((response) => response.json())
         .then((data) => {
-        setPropiedad({...propiedad, esta_guardado: true})
+          if( data.message === 'Guardados máximos de plan alcanzados'){
+            window.alert(`${data.message}.`);
+            toSuscripcion();
+          }
+        else {
+          setPropiedad({...propiedad, esta_guardado: true})
+        }
         //window.alert('Propiedad guardada.')
         })
       .then(data=>console.log(data))
       .catch((error) => {
-          console.error('Error al obtener los datos:', error);
+          if( error.message === 'Guardados máximos de plan alcanzados'){
+            window.alert(`${error.message}.`);
+            ok = false;
+            toSuscripcion();
+          }
+          else 
+          window.alert("Tasación guardada.");
+          //else console.error('Error al obtener los datos:', error);
       });
+      if(ok){
+        fetch(apiUrlProp, requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            if( data.message === 'Guardados máximos de plan alcanzados'){
+                window.alert(`${data.message}.`);
+                toSuscripcion();
+              }
+          else setPropiedad({...propiedad, esta_guardado: true})
+          //window.alert('Propiedad guardada.')
+          })
+        .then(data=>console.log(data))
+        .catch((error) => {
+            console.log(error)
+            if( error.message === 'Guardados máximos de plan alcanzados'){
+              window.alert(`${error.message}.`);
+              toSuscripcion();
+            }
+            // window.alert(error)
+            console.error('Error al obtener los datos:', error);
+        });
+      }
   }
 
   const handleVolver = () => {
@@ -307,7 +352,7 @@ function Resultados({resultados, user}) {
                     .format(data.precio)             
                   }</h2>
                   {
-                    (propiedad && propiedad.precioAnterior) &&
+                    (propiedad && propiedad.precioAnterior) ? (
                     data.precio > propiedad.precioAnterior ? 
                       <h3 className="green smaller">Tasación previa: {Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
                       .format(/*data.precio -*/ propiedad.precioAnterior)} ▲</h3>
@@ -317,7 +362,7 @@ function Resultados({resultados, user}) {
                     :
                       <h3 className="red smaller">Tasación previa: {Intl.NumberFormat('es-AR', {style: 'currency', currency: 'USD'})
                       .format(/*data.precio -*/ propiedad.precioAnterior)} ▼</h3>
-                    )
+                    )) : <></>
                   }
                 </div>
               }
