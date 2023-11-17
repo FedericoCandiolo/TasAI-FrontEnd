@@ -343,7 +343,7 @@ function Resultados({resultados, user, toSuscripcion}) {
         <div class="border-b border-gray-900/10 pb-12 ">
           <article class="box height75vh padding-box">
             <h1>Propiedad</h1>         
-            <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2">
+            <section class="nospace mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-1 ml-2 mr-2 nomarginleft">
               <h3>{`${propiedad.calle} ${propiedad.numero}, ${propiedad.ciudad}`}</h3>
               {propiedad.precio &&
                 <div className="">

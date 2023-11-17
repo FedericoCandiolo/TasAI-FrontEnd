@@ -145,7 +145,7 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
                         cod: "numerotarjeta",
                         labeltext: "Número de la tarjeta",
                         ph: "0000000000000000",
-                        tt: "Número de tarjeta válido de Visa o MasterCard",
+                        tt: "Número de tarjeta de crédito Visa o MasterCard",
                       }}
                       {...{valor: fields["numerotarjeta"]}}{...{actualizarDato: (v)=>handleField("numerotarjeta",v)}}
                       />

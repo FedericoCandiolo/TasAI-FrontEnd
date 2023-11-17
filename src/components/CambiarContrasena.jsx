@@ -60,8 +60,12 @@ export default function CambiarContrasena({
     //console.log(user);
 
     if (newPassword.pwdNueva === newPassword.confirm_pwd ) {
-      cambiarContrasenaAPI();
-      // btnCambiarContrasena();
+      if (newPassword.pwdActual === user.pwd ) {
+        cambiarContrasenaAPI();
+        // btnCambiarContrasena();
+      } else {
+        window.alert("La contraseña actual no es correcta.");
+      }
     } else {
       window.alert("La contraseña nueva y la confirmación no coinciden.");
     }

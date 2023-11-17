@@ -15,6 +15,7 @@ import OlvidoContrasena from "./OlvidoContrasena";
 export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
   const [propiedad, setPropiedad] = useState({});
   const [leermas, setLeerMas] = useState(false);
+  const [prevState, setPrevState] = useState(undefined);
 
   const setPagepart = (v) => {
     if (v === "carga") setPropiedad({});
@@ -64,7 +65,13 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
             btnVolver: () => setPagepart("menu"),
             btnCargar: (n) => procesar(() => {
               setUser({...user,id_plan: n});
-              setPagepart("menu");
+              if(n===2 && prevState && prevState === 'resultados'){
+                setPagepart("resultados");
+              }
+              else{
+                setPrevState(pagepart);
+                setPagepart("menu");
+              }
             }),
             user,
           }}
@@ -103,7 +110,8 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
       ) : pagepart === "resultados" ? (
         <Resultados
           {...{
-            resultados: {
+            resultados:
+            {
               ...propiedad,
               btnNuevaTasacion: () => {
                 setPropiedad({});
@@ -111,7 +119,11 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
               },              
             },
             user,
-            toSuscripcion : () => setPagepart('premium'),
+            toSuscripcion : (resultados) =>{
+              setPrevState(pagepart);
+              setPagepart('premium');
+
+            } ,
           }}
         />
       ) : pagepart === "procesando" ? (

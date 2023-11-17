@@ -3,5 +3,6 @@ const nextConfig = {}
 
 module.exports = {
     ...nextConfig,
+    reactStrictMode: false,
     reactDevOverlay: false
 }

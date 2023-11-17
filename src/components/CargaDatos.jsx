@@ -132,7 +132,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
         </div>
         <form className="bg-white rounded-2xl ml-2 h-fit padding-hor">
           <div className="space-y-12">
-            <div className="border-b border-gray-900/10 pb-12 DivWithScroll">
+            <div className="border-b border-gray-900/10 pb-12 DivWithScroll paddingbottom0">
               <h2 className="text-base font-semibold leading-7 text-gray-900 ml-2 space-before">
                 Nueva tasación
               </h2>
@@ -140,85 +140,97 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                 Ingrese todos los datos de la propiedad a tasar.
               </p>
 
-              <FieldTasacion
-                {...{
-                  fieldtype: "string",
-                  classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                  cod: "calle",
-                  labeltext: "Calle",
-                  ph: "Calle",
-                  tt: "Dirección en Ciudad de Buenos Aires",
-                }}
-                {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}
-                />
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 grid-cols-8 gridboxbottom gridboxup ml-2 mr-2 grid-gap">
+                <FieldTasacion
+                  {...{
+                    fieldtype: "string",
+                    classes: "sm:col-span-2 ml-2 mr-2 separacion-campos margin0",
+                    cod: "calle",
+                    labeltext: "Calle",
+                    ph: "Calle",
+                    tt: "Dirección en Ciudad de Buenos Aires",
+                  }}
+                  {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}
+                  />
 
-              <FieldTasacion
-                {...{
-                  fieldtype: "string",
-                  classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                  cod: "numero",
-                  labeltext: "Nro.",
-                  ph: "123",
-                  tt: "Dirección en Ciudad de Buenos Aires",
-                }}
-                {...{valor: fields["numero"]}}{...{actualizarDato: (v)=>handleField("numero",v)}}
-                />
+                <FieldTasacion
+                  {...{
+                    fieldtype: "string",
+                    classes: "sm:col-span-2 ml-2 mr-2 separacion-campos margin0",
+                    cod: "numero",
+                    labeltext: "Nro.",
+                    ph: "123",
+                    tt: "Dirección en Ciudad de Buenos Aires",
+                  }}
+                  {...{valor: fields["numero"]}}{...{actualizarDato: (v)=>handleField("numero",v)}}
+                  />
 
-              <FieldTasacion
-                {...{
-                  fieldtype: "options",
-                  classes: "sm:col-span-4 ml-2 mr-2 separacion-campos",
-                  cod: "ciudad",
-                  labeltext: "Barrio",
-                  ph: "Calle 123, Ciudad",
-                  tt: "Ciudad en Ciudad de Buenos Aires",
-                  options: [...(ciudades.sort())/*,'OTRA'*/]
-                }}
-                {...{valor: fields["ciudad"]}}{...{actualizarDato: (v)=>handleField("ciudad",v)}}
-                />
+                <FieldTasacion
+                  {...{
+                    fieldtype: "options",
+                    classes: "sm:col-span-2 ml-2 mr-2 separacion-campos margin0",
+                    cod: "ciudad",
+                    labeltext: "Barrio",
+                    ph: "Calle 123, Ciudad",
+                    tt: "Ciudad en Ciudad de Buenos Aires",
+                    options: [...(ciudades.sort())/*,'OTRA'*/]
+                  }}
+                  {...{valor: fields["ciudad"]}}{...{actualizarDato: (v)=>handleField("ciudad",v)}}
+                  />
 
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ml-2 mr-2 grid-gap">
-                {[
-                  {
-                    fieldtype: "number",
-                    classes: "sm:col-span-2",
-                    cod: "m2",
-                    labeltext: "Metros Cuadrados",
-                    ph: 0,
-                    tt: "Cantidad de metros cuadrados",
-                  },
-                  {
-                    fieldtype: "number",
-                    classes: "sm:col-span-2",
-                    cod: "ambientes",
-                    labeltext: "Ambientes",
-                    ph: 0,
-                    tt: "Cantidad de ambientes",
-                  },
-                  {
-                    fieldtype: "number",
-                    classes: "sm:col-span-2",
-                    cod: "dormitorios",
-                    labeltext: "Dormitorios",
-                    ph: 0,
-                    tt: "Cantidad de dormitorios",
-                  },
-                  {
-                    fieldtype: "number",
-                    classes: "sm:col-span-2",
-                    cod: "cocheras",
-                    labeltext: "Cocheras",
-                    ph: 0,
-                    tt: "Cantidad de cocheras",
-                  },
-                  {
-                    fieldtype: "number",
-                    classes: "sm:col-span-2",
-                    cod: "banios",
-                    labeltext: "Baños",
-                    ph: 0,
-                    tt: "Cantidad de baños",
-                  },
+                {/* <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 grid-cols-8 ml-2 mr-2 grid-gap"> */}
+                  {[
+                    {
+                      fieldtype: "number",
+                      classes: "sm:col-span-2",
+                      cod: "m2",
+                      labeltext: "Metros Cuadrados",
+                      ph: 0,
+                      tt: "Cantidad de metros cuadrados",
+                    },
+                    {
+                      fieldtype: "number",
+                      classes: "sm:col-span-2",
+                      cod: "ambientes",
+                      labeltext: "Ambientes",
+                      ph: 0,
+                      tt: "Cantidad de ambientes",
+                    },
+                    {
+                      fieldtype: "number",
+                      classes: "sm:col-span-2",
+                      cod: "dormitorios",
+                      labeltext: "Dormitorios",
+                      ph: 0,
+                      tt: "Cantidad de dormitorios",
+                    },
+                    {
+                      fieldtype: "number",
+                      classes: "sm:col-span-2",
+                      cod: "cocheras",
+                      labeltext: "Cocheras",
+                      ph: 0,
+                      tt: "Cantidad de cocheras",
+                    },
+                    {
+                      fieldtype: "number",
+                      classes: "sm:col-span-2",
+                      cod: "banios",
+                      labeltext: "Baños",
+                      ph: 0,
+                      tt: "Cantidad de baños",
+                    },
+                  ].map((e) => (
+                    <FieldTasacion {...e} {...{valor: fields[e.cod]}}{...{actualizarDato: (v)=>handleField(e.cod,v)}} />
+                  ))
+                }
+              </div>
+              <p className="mt-1 text-sm leading-6 text-gray-600 ml-2 space-below">
+                Asigne las características de la propiedad que correspondan.
+              </p>
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 grid-cols-8 gridboxup ml-2 mr-2 grid-gap">
+              {
+                [
                   {
                     fieldtype: "boolean",
                     classes: "sm:col-span-2",
@@ -271,7 +283,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                 ].map((e) => (
                   <FieldTasacion {...e} {...{valor: fields[e.cod]}}{...{actualizarDato: (v)=>handleField(e.cod,v)}} />
                 )
-                )}
+                )
+              }
               </div>
             </div>
           </div>

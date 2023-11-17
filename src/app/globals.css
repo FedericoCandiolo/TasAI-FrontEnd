@@ -356,9 +356,29 @@ nextjs-portal {
   overflow: visible !important;
 }
 
+.paddingbottom0{
+  padding-bottom: 0 !important;
+}
+
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.margin0 {
+  margin: 0 !important;
+}
+
+.gridboxup{
+  margin-top: 0.5rem;
+}
+
+.gridboxbottom{
+  margin-bottom: 0.8rem;
+}
+
 .checkboxes {
   display: block;
-  border: 1px #eee solid;
+  /* border: 1px #eee solid; */
   overflow: visible;
   position: absolute;
   z-index: 2;
@@ -397,6 +417,18 @@ nextjs-portal {
   grid-column: 1 / span 2;
 }
 
+.headertext{
+  font-size: 800 !important;
+  margin-left: 1rem;
+  margin-top: 0;
+  border-radius: 1rem;
+  padding: 0.25rem;
+}
+
+.headertext:hover{
+  background-color: rgb(13, 68, 65);
+}
+
 .grid2x2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -404,6 +436,10 @@ nextjs-portal {
   height: 75vh;
   width: 75vw;
   text-align: center;
+}
+
+.pointer{
+  cursor: pointer;
 }
 
 .row{
@@ -477,6 +513,10 @@ nextjs-portal {
 
 .sizefirstpart{
   width: 8rem !important;
+}
+
+.nomarginleft{
+  margin-left: 0 !important;
 }
 
 .DivWithScrollTas {
