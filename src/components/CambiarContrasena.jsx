@@ -39,7 +39,7 @@ export default function CambiarContrasena({
       .then((response) => response.json())
       .then((data) => {
         window.alert("Contraseña cambiada con éxito");
-        btnCambiarContrasena(newPassword.pwdActual);
+        btnCambiarContrasena(newPassword.pwdNueva);
       })
       .catch((error) => {
         //window.alert("error");
