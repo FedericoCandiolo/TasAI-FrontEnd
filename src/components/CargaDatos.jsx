@@ -149,6 +149,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                     labeltext: "Calle",
                     ph: "Calle",
                     tt: "Dirección en Ciudad de Buenos Aires",
+                    maxlength: 80
                   }}
                   {...{valor: fields["calle"]}}{...{actualizarDato: (v)=>handleField("calle",v)}}
                   />
@@ -161,6 +162,7 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                     labeltext: "Nro.",
                     ph: "123",
                     tt: "Dirección en Ciudad de Buenos Aires",
+                    maxlength: 7
                   }}
                   {...{valor: fields["numero"]}}{...{actualizarDato: (v)=>handleField("numero",v)}}
                   />
@@ -187,6 +189,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                       labeltext: "Metros Cuadrados",
                       ph: 0,
                       tt: "Cantidad de metros cuadrados",
+                      min: 1,
+                      max: 99999,
                     },
                     {
                       fieldtype: "number",
@@ -195,6 +199,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                       labeltext: "Ambientes",
                       ph: 0,
                       tt: "Cantidad de ambientes",
+                      min: 1,
+                      max: 20,
                     },
                     {
                       fieldtype: "number",
@@ -203,6 +209,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                       labeltext: "Dormitorios",
                       ph: 0,
                       tt: "Cantidad de dormitorios",
+                      min: 0,
+                      max: 20,
                     },
                     {
                       fieldtype: "number",
@@ -211,6 +219,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                       labeltext: "Cocheras",
                       ph: 0,
                       tt: "Cantidad de cocheras",
+                      min: 0,
+                      max: 20,
                     },
                     {
                       fieldtype: "number",
@@ -219,6 +229,8 @@ function CargaDatos({ btnsubmit, btnCancelar, fields, setFields, user}) {
                       labeltext: "Baños",
                       ph: 0,
                       tt: "Cantidad de baños",
+                      min: 0,
+                      max: 20,
                     },
                   ].map((e) => (
                     <FieldTasacion {...e} {...{valor: fields[e.cod]}}{...{actualizarDato: (v)=>handleField(e.cod,v)}} />

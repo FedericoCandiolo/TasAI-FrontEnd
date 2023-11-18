@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 
-function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actualizarDato, options }) {
+function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actualizarDato, options, maxlength,min,max }) {
   const handleChange = (e) => {
+    console.log([0,1,2,3,4,5,6,7,8,9].findIndex(e=>`${e}`===`${e.target.value}`[0]))
+    if(
+      (fieldtype==='string' && e.target.value.length <= (maxlength || 99)) ||
+      (fieldtype==='number' && parseInt(e.target.value) >= (min || 0)  && parseInt(e.target.value) <= (max || 99)) ||
+      (fieldtype !=='string' && fieldtype !=='number')
+    )
     actualizarDato(
       fieldtype === "boolean" 
         ? 
@@ -53,6 +59,28 @@ function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actu
             </select>
           </div>
         </>
+      ) : fieldtype === "string" ? (
+        <>
+          <label
+            htmlFor={cod}
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            {labeltext}
+          </label>
+          <div className="mt-2">
+            <input
+              id={cod}
+              name={cod}
+              type={fieldtype}
+              className="paddingsinput block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              placeholder={ph}
+              autoComplete="off"
+              onChange={handleChange}
+              value={valor}
+              maxLength={maxlength || 99}
+            />
+          </div>
+        </>
       ) : (
         <>
           <label
@@ -71,6 +99,8 @@ function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actu
               autoComplete="off"
               onChange={handleChange}
               value={valor}
+              min={min || 0}
+              max={max || 0}
             />
           </div>
         </>

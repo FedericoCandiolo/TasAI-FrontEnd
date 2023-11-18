@@ -12,13 +12,15 @@ function Login({
   leermas,
   toggleLeerMas,
   btnOlvideContrasena,
+  windowDialog,
 }) {
   useEffect(() => {
     setUser({ origen: "login" });
   }, []);
 
   const handleLogIn = () => {
-    window.alert("Iniciando sesión.");
+    window.alert("Iniciando sesión."); //// ACA CAMBIO A DIALOG
+    //windowDialog('Iniciando sesión.');
     //console.log(user);
     btnLogin();
     //console.log(user);

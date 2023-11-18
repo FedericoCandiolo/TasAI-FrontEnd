@@ -16,6 +16,12 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
   const [propiedad, setPropiedad] = useState({});
   const [leermas, setLeerMas] = useState(false);
   const [prevState, setPrevState] = useState(undefined);
+  const [openDialog,setOpenDialog] = useState(false);
+
+
+  const windowDialog = (msg) => {
+    setOpenDialog(true);
+  }
 
   const setPagepart = (v) => {
     if (v === "carga") setPropiedad({});
@@ -36,6 +42,11 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
   //return   <Fetch />;
   return (
     <>
+      {openDialog && 
+        <dialog open>
+          <p>Greetings, one and all!</p>
+        </dialog>
+      }
       {pagepart === "login" ? (
         <Login
           {...{
@@ -46,6 +57,7 @@ export default function Main({ pagepart, setPagepartRaw, user, setUser }) {
             leermas,
             toggleLeerMas: () => setLeerMas(!leermas),
             btnOlvideContrasena: () => setPagepart("olvido"),
+            windowDialog
           }}
         />
       ) : pagepart === "register" ? (
