@@ -438,6 +438,14 @@ nextjs-portal {
   text-align: center;
 }
 
+.small-text{
+  font-size: x-small !important;
+}
+
+.fix-width{
+  max-width: 19vw;
+}
+
 .pointer{
   cursor: pointer;
 }

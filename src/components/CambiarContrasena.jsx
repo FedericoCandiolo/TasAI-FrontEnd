@@ -15,6 +15,8 @@ export default function CambiarContrasena({
     confirm_pwd: "",
   });
 
+  const isPasswordValid = (pwd) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/.test(pwd);
+
   useEffect(() => {
     //setNewPassword({ pwdActual: user.password });
     setPassword(user.pwd);
@@ -60,11 +62,15 @@ export default function CambiarContrasena({
     //console.log(user);
 
     if (newPassword.pwdNueva === newPassword.confirm_pwd ) {
-      if (newPassword.pwdActual === user.pwd ) {
-        cambiarContrasenaAPI();
-        // btnCambiarContrasena();
+      if (isPasswordValid(newPassword.pwdNueva)) {
+        if (newPassword.pwdActual === user.pwd ) {
+          cambiarContrasenaAPI();
+          // btnCambiarContrasena();
+        } else {
+          window.alert("La contraseña actual no es correcta.");
+        }
       } else {
-        window.alert("La contraseña actual no es correcta.");
+        window.alert("La nueva contraseña no cumple con los requisitos.");
       }
     } else {
       window.alert("La contraseña nueva y la confirmación no coinciden.");
@@ -93,9 +99,14 @@ export default function CambiarContrasena({
             <h1 className="text-gray-800 font-bold text-2xl mb-1">
               Cambio de contraseña
             </h1>
-            <p className="text-sm font-normal text-gray-600 mb-7">
+            {/* <p className="text-sm font-normal text-gray-600 mb-7">
               Ingrese contraseña actual y la nueva contraseña
             </p>
+            <div className="text-sm font-normal text-gray-600 mb-7 smalltext">
+              <p>La contraseña debe tener un mínimo de 8 caracteres e incluir al menos una letra minúscula, una letra mayúscula, un número y un caracter especial.</p>
+            </div> */}
+            <p className="text-sm font-normal text-gray-600 mb-7 small-text fix-width">La contraseña debe tener un mínimo de 8 caracteres e incluir al menos una letra minúscula, una letra mayúscula, un número y un caracter especial.</p>
+          
             <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

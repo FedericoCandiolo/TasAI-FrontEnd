@@ -15,6 +15,10 @@ function Register({
     setUser({ origen: "register" });
   }, []);
 
+
+  const isPasswordValid = (pwd) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/.test(pwd);
+
+
   const handleChange = (e) => {
     const newuser = { ...user };
     //console.log(e)
@@ -28,8 +32,12 @@ function Register({
     e.preventDefault();
     //console.log(user);
     if (user.pwd === user.confirm_pwd) {
-      window.alert("Registrado");
-      btnRegister();
+      if (isPasswordValid(user.pwd)) {
+        window.alert("Registrado");
+        btnRegister();
+      } else {
+        window.alert("La contraseña no cumple con los requisitos.");
+      }
     } else {
       window.alert("Las contraseñas no coinciden.");
     }
@@ -53,8 +61,8 @@ function Register({
       </div>
       <div className="flex w-1/4 justify-center items-center bg-gradient-to-b ">
         <form className="bg-white align-middle">
-          <h1 className="text-gray-800 font-bold text-2xl mb-1">Hola!</h1>
-          <p className="text-sm font-normal text-gray-600 mb-7">Bienvenido/a</p>
+          <h1 className="text-gray-800 font-bold text-2xl mb-1">Regístrese</h1>
+          <p className="text-sm font-normal text-gray-600 mb-7 small-text fix-width">La contraseña debe tener un mínimo de 8 caracteres e incluir al menos una letra minúscula, una letra mayúscula, un número y un caracter especial.</p>
           <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
