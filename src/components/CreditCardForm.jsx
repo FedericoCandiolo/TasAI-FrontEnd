@@ -98,8 +98,10 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
     fields.numerotarjeta && fields.numerotarjeta.length === 16 
     && fields.titulartarjeta 
     && fields.fechatarjeta 
+    && fields.fechatarjeta.length === 4 
     && (fields.cvvtarjeta && fields.cvvtarjeta.length === 3 )
     && (isVisa || isMastercard)
+    && `${(new Date()).getYear()-100}${(new Date()).getMonth()+1}` <= `${fields.fechatarjeta.substring(2,4)}${fields.fechatarjeta.substring(0,2)}`
   );
 
   return (    
