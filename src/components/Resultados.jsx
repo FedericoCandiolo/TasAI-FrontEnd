@@ -102,7 +102,7 @@ function Resultados({resultados, user, toSuscripcion}) {
             console.log(data);
             if(data.message === 'Tasaciones máximas de plan alcanzadas' || 
             data.message === 'Guardados máximos de plan alcanzados'){
-              window.alert(`${data.message}.`);
+              window.alert(`🛑 ERROR 🛑\n${data.message}.`);
               toSuscripcion();
             }
             setPropiedad({...propiedad, precio: data.precio, id_propiedad: data.id_propiedad, id_tasacion: data.id})
@@ -112,7 +112,7 @@ function Resultados({resultados, user, toSuscripcion}) {
           .catch((error) => {
             if(error.message === 'Tasaciones máximas de plan alcanzadas' || 
                error.message === 'Guardados máximos de plan alcanzados'){
-              window.alert(`${error.message}.`);
+              window.alert(`🛑 ERROR 🛑\n${error.message}.`);
               toSuscripcion();
             }
             else console.error('Error al obtener los datos:', error);
@@ -137,7 +137,7 @@ function Resultados({resultados, user, toSuscripcion}) {
             console.log(data);
             if(data.message === 'Tasaciones máximas de plan alcanzadas' || 
             data.message === 'Guardados máximos de plan alcanzados'){
-              window.alert(`${data.message}.`);
+              window.alert(`🛑 ERROR 🛑\n${data.message}.`);
               toSuscripcion();
             }
             setPropiedad({...propiedad, precio: data.precio, id_tasacion: data.id})
@@ -147,7 +147,7 @@ function Resultados({resultados, user, toSuscripcion}) {
           .catch((error) => {
             if(error.message === 'Tasaciones máximas de plan alcanzadas' || 
                 error.message === 'Guardados máximos de plan alcanzados'){
-              window.alert(`${error.message}.`);
+              window.alert(`🛑 ERROR 🛑\n${error.message}.`);
               toSuscripcion();
             }
               else console.error('Error al obtener los datos:', error);
@@ -274,7 +274,7 @@ function Resultados({resultados, user, toSuscripcion}) {
         .then((response) => response.json())
         .then((data) => {
           if( data.message === 'Guardados máximos de plan alcanzados'){
-            window.alert(`${data.message}.`);
+            window.alert(`🛑 ERROR 🛑\n${data.message}.`);
             toSuscripcion();
           }
         else {
@@ -285,7 +285,7 @@ function Resultados({resultados, user, toSuscripcion}) {
       .then(data=>console.log(data))
       .catch((error) => {
           if( error.message === 'Guardados máximos de plan alcanzados'){
-            window.alert(`${error.message}.`);
+            window.alert(`🛑 ERROR 🛑\n${error.message}.`);
             ok = false;
             toSuscripcion();
           }
@@ -298,7 +298,7 @@ function Resultados({resultados, user, toSuscripcion}) {
           .then((response) => response.json())
           .then((data) => {
             if( data.message === 'Guardados máximos de plan alcanzados'){
-                window.alert(`${data.message}.`);
+                window.alert(`🛑 ERROR 🛑\n${data.message}.`);
                 toSuscripcion();
               }
           else setPropiedad({...propiedad, esta_guardado: true})
@@ -308,7 +308,7 @@ function Resultados({resultados, user, toSuscripcion}) {
         .catch((error) => {
             console.log(error)
             if( error.message === 'Guardados máximos de plan alcanzados'){
-              window.alert(`${error.message}.`);
+              window.alert(`🛑 ERROR 🛑\n${error.message}.`);
               toSuscripcion();
             }
             // window.alert(error)

@@ -58,7 +58,7 @@ const CreditCardForm = ({btnVolver, btnCargar, user,setUser}) => {
       }${
         fields.cvvtarjeta.length === 3  ? "" : "CVV, "
       }`.slice(0,-2);
-      window.alert(msg);
+      window.alert(`🛑 ERROR 🛑\n${msg}`);
       //window.alert(fields.numerotarjeta.length);
       //window.alert(fields.cvvtarjeta.length);
     }

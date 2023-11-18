@@ -11,8 +11,7 @@ function Login({
   setUser,
   leermas,
   toggleLeerMas,
-  btnOlvideContrasena,
-  windowDialog,
+  btnOlvideContrasena
 }) {
   useEffect(() => {
     setUser({ origen: "login" });

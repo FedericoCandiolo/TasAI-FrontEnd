@@ -74,7 +74,7 @@ export default function LeafletMap({ propiedad }) {
                   <p>{m.popUp.baños} { m.popUp.baños === 1 ? 'baño' : 'baños'}</p>
                   <p>{ m.popUp.toilette ? '✔️' : '❌'} Toilette</p>
                   <p>{ m.popUp.lavadero ? '✔️' : '❌'} Lavadero</p>
-                  <p>{ m.popUp.ac ? '✔️' : '❌'} A/C</p>
+                  <p>{ m.popUp.AC ? '✔️' : '❌'} A/C</p>
                   <p>{ m.popUp.balcon ? '✔️' : '❌'} Balcón</p>
                   <p>{ m.popUp.parrilla ? '✔️' : '❌'} Parrilla</p>
                   <p>{ m.popUp.jardin ? '✔️' : '❌'} Jardin</p>

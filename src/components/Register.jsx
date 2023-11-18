@@ -36,10 +36,10 @@ function Register({
         window.alert("Registrado");
         btnRegister();
       } else {
-        window.alert("La contraseña no cumple con los requisitos.");
+        window.alert("🛑 ERROR 🛑\nLa contraseña no cumple con los requisitos.");
       }
     } else {
-      window.alert("Las contraseñas no coinciden.");
+      window.alert("🛑 ERROR 🛑\nLas contraseñas no coinciden.");
     }
   };
 

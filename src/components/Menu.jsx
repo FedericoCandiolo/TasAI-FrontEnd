@@ -27,12 +27,12 @@ function Menu({ setPagepart, user, setUser }) {
 
       //window.alert('por fetch')
       console.log(JSON.stringify(property));
-      //Realizar una solicitud GET a la API utilizando fetch() //ERROR CORS
+      //Realizar una solicitud GET a la API utilizando fetch() 
       fetch(apiUrl, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.non_field_errors) {
-            window.alert(data.non_field_errors[0]);
+            window.alert(`🛑 ERROR 🛑\n${data.non_field_errors[0]}`);
             setPagepart("login");
           } else {
             setData(data); // Actualizar el estado con los datos recibidos de la API
@@ -48,7 +48,7 @@ function Menu({ setPagepart, user, setUser }) {
           }
         })
         .catch((error) => {
-          window.alert("error");
+          window.alert("🛑 ERROR 🛑\n");
           console.error("Error al obtener los datos:", error);
         });
     }, []); // Ejecuta esto solo una vez al montar el componente
@@ -77,23 +77,28 @@ function Menu({ setPagepart, user, setUser }) {
         .then((response) => response.json())
         .then((data) => {
           if (data.non_field_errors) {
-            window.alert(data.non_field_errors[0]);
+            window.alert(`🛑 ERROR 🛑\n${data.non_field_errors[0]}`);
             setPagepart("register");
           } else {
-            setData(data); // Actualizar el estado con los datos recibidos de la API
             //window.alert(data);
             //console.log(data);
-            setUser({
-              ...user,
-              status: "ok",
-              id_usuario: data.user_id,
-              id_plan: 1,
-            }); /// EL id_plan default es 1
-            console.log(user);
+            if(!(data && data.user_id)){              
+              window.alert(`🛑 ERROR 🛑\nNombre de usuario ya utilizado.`);
+              setPagepart("login");
+            } else {
+              setData(data); // Actualizar el estado con los datos recibidos de la API
+              setUser({
+                ...user,
+                status: "ok",
+                id_usuario: data.user_id,
+                id_plan: 1,
+              }); /// EL id_plan default es 1
+              console.log(user);
+            }
           }
         })
         .catch((error) => {
-          window.alert("error");
+          window.alert("🛑 ERROR 🛑\n");
           console.error("Error al obtener los datos:", error);
         });
     }, []); // Ejecuta esto solo una vez al montar el componente

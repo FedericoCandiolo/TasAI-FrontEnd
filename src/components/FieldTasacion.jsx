@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function FieldTasacion({ fieldtype, classes, cod, labeltext, ph, tt, valor, actualizarDato, options, maxlength,min,max }) {
   const handleChange = (e) => {
-    console.log([0,1,2,3,4,5,6,7,8,9].findIndex(e=>`${e}`===`${e.target.value}`[0]))
+    //console.log([0,1,2,3,4,5,6,7,8,9].findIndex(e=>`${e}`===`${e.target.value}`[0]))
     if(
       (fieldtype==='string' && e.target.value.length <= (maxlength || 99)) ||
       (fieldtype==='number' && parseInt(e.target.value) >= (min || 0)  && parseInt(e.target.value) <= (max || 99)) ||

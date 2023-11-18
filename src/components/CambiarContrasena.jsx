@@ -45,7 +45,7 @@ export default function CambiarContrasena({
       })
       .catch((error) => {
         //window.alert("error");
-        window.alert("Contraseña incorrecta.")
+        window.alert("🛑 ERROR 🛑\nContraseña incorrecta.")
         console.error("Error al obtener los datos:", error);
       });
   };
@@ -67,13 +67,13 @@ export default function CambiarContrasena({
           cambiarContrasenaAPI();
           // btnCambiarContrasena();
         } else {
-          window.alert("La contraseña actual no es correcta.");
+          window.alert("🛑 ERROR 🛑\nLa contraseña actual no es correcta.");
         }
       } else {
-        window.alert("La nueva contraseña no cumple con los requisitos.");
+        window.alert("🛑 ERROR 🛑\nLa nueva contraseña no cumple con los requisitos.");
       }
     } else {
-      window.alert("La contraseña nueva y la confirmación no coinciden.");
+      window.alert("🛑 ERROR 🛑\nLa contraseña nueva y la confirmación no coinciden.");
     }
   };
 
