@@ -6,7 +6,7 @@ function LeerMas() {
         <h1>El proyecto</h1>
         <p>TasAI es un proyecto que surge a partir de un grupo de estudiantes de la Universidad CAECE como proyecto final de las carreras de Ingeniería en Sistemas y Licenciatura en Sistemas.</p>
         <p>El producto ofrecido se presenta como una opción de consulta a los propietarios y martilleros públicos inmobiliarios para la definición de la tasación de su propiedad, utilizando Inteligencia Artificial.
-        El producto cuenta con una opción básica y gratuita, que permite realizar hasta 3 tasaciones por día y una opción Premium, que permite realizar tasaciones ilimitadas.</p>
+        El producto cuenta con una opción básica y gratuita, que permite realizar hasta 5 tasaciones y guardar 2 de estas, y una opción Premium, que permite realizar tasaciones ilimitadas.</p>
         <h1>Los integrantes</h1>
         <div className='integrantes'>
             <div>
